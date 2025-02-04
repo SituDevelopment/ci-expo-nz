@@ -1,0 +1,30 @@
+bug:
+  - head-branch: ["bug/*"]
+
+chore:
+  - head-branch: ["chore/*"]
+
+feature:
+  - head-branch: ["feature/*"]
+
+dependencies:
+  - changed-files:
+      - any-glob-to-any-file:
+          ["package.json", "package-lock.json", "requirements.txt"]
+
+documentation:
+  - changed-files:
+      - any-glob-to-any-file: ["README.md"]
+
+github_actions:
+  - changed-files:
+      - any-glob-to-any-file: [".github/workflows/*.yaml"]
+
+javascript:
+  - changed-files:
+      - any-glob-to-any-file:
+          ["*.js", "*.ts", "package.json", "package-lock.json"]
+
+python:
+  - changed-files:
+      - any-glob-to-any-file: ["*.py", "requirements.txt"]

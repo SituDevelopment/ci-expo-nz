@@ -1,0 +1,31 @@
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      time: "13:00"
+      timezone: "Australia/Brisbane"
+
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      time: "13:00"
+      timezone: "Australia/Brisbane"
+
+  - package-ecosystem: "pip"
+    directory: "/"
+    groups:
+      pydantic:
+        patterns:
+          - "pydantic"
+          - "pydantic-core"
+      pylint:
+        patterns:
+          - "astroid"
+          - "pylint"
+    schedule:
+      interval: "weekly"
+      time: "13:00"
+      timezone: "Australia/Brisbane"

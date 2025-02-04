@@ -1,0 +1,7 @@
+name: Status Checks
+
+on: pull_request
+
+jobs:
+  all:
+    uses: SituDevelopment/.github/.github/workflows/all.yaml@main
