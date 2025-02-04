@@ -1,6 +1,5 @@
 // storage-adapter-import-placeholder
 import { mongooseAdapter } from "@payloadcms/db-mongodb";
-import { payloadCloudPlugin } from "@payloadcms/payload-cloud";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import { vercelBlobStorage } from "@payloadcms/storage-vercel-blob";
 import path from "path";
@@ -28,11 +27,10 @@ export default buildConfig({
         outputFile: path.resolve(dirname, "payload-types.ts"),
     },
     db: mongooseAdapter({
-        url: process.env.DATABASE_URI || false,
+        url: process.env.DATABASE_URI || "",
     }),
     sharp,
     plugins: [
-        payloadCloudPlugin(),
         vercelBlobStorage({
             enabled: true, // Optional, defaults to true
             // Specify which collections should use Vercel Blob
