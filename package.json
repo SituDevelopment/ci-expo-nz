@@ -2,10 +2,16 @@
   "name": "ci-expo-au",
   "version": "1.0.0",
   "description": "",
+  "engines": {
+    "node": "^18"
+  },
   "devDependencies": {
     "prettier": "^3.4.2"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@payloadcms/storage-vercel-blob": "^3.20.0"
+  }
 }
