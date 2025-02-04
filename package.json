@@ -1,17 +1,50 @@
 {
-  "name": "ci-expo-au",
-  "version": "1.0.0",
-  "description": "",
-  "engines": {
-    "node": "^18"
-  },
-  "devDependencies": {
-    "prettier": "^3.4.2"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "@payloadcms/storage-vercel-blob": "^3.20.0"
-  }
+    "name": "ci-expo-au",
+    "version": "1.0.0",
+    "description": "A blank template to get started with Payload 3.0",
+    "license": "MIT",
+    "type": "module",
+    "scripts": {
+        "build": "cross-env NODE_OPTIONS=--no-deprecation next build",
+        "dev": "cross-env NODE_OPTIONS=--no-deprecation next dev",
+        "devsafe": "rm -rf .next && cross-env NODE_OPTIONS=--no-deprecation next dev",
+        "generate:importmap": "cross-env NODE_OPTIONS=--no-deprecation payload generate:importmap",
+        "generate:types": "cross-env NODE_OPTIONS=--no-deprecation payload generate:types",
+        "lint": "cross-env NODE_OPTIONS=--no-deprecation next lint",
+        "payload": "cross-env NODE_OPTIONS=--no-deprecation payload",
+        "start": "cross-env NODE_OPTIONS=--no-deprecation next start"
+    },
+    "dependencies": {
+        "@payloadcms/db-mongodb": "^3.20.0",
+        "@payloadcms/next": "latest",
+        "@payloadcms/richtext-lexical": "latest",
+        "@payloadcms/storage-vercel-blob": "^3.20.0",
+        "@trivago/prettier-plugin-sort-imports": "^5.2.2",
+        "cross-env": "^7.0.3",
+        "graphql": "^16.8.1",
+        "next": "15.1.5",
+        "payload": "latest",
+        "prettier-plugin-tailwindcss": "^0.6.11",
+        "react": "19.0.0",
+        "react-dom": "19.0.0",
+        "sharp": "0.32.6"
+    },
+    "devDependencies": {
+        "@eslint/eslintrc": "^3.2.0",
+        "@types/node": "^22.5.4",
+        "@types/react": "19.0.7",
+        "@types/react-dom": "19.0.3",
+        "eslint": "^9.16.0",
+        "eslint-config-next": "15.1.5",
+        "prettier": "^3.4.2",
+        "typescript": "5.7.3"
+    },
+    "engines": {
+        "node": "^18.20.2 || >=20.9.0"
+    },
+    "pnpm": {
+        "onlyBuiltDependencies": [
+            "sharp"
+        ]
+    }
 }

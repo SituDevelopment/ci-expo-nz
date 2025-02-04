@@ -1,0 +1,37 @@
+{
+    "arrowParens": "always",
+    "bracketSameLine": false,
+    "bracketSpacing": true,
+    "importOrder": ["<THIRD_PARTY_MODULES>", "/assets/(.*)$", "/components/(.*)$", "^[./]"],
+    "importOrderSeparation": true,
+    "jsxSingleQuote": false,
+    "overrides": [
+        {
+            "files": "**/*.html",
+            "options": {
+                "printWidth": 120
+            }
+        },
+        {
+            "files": "**/*.svg",
+            "options": {
+                "parser": "html"
+            }
+        },
+        {
+            "files": "**/*.yaml",
+            "options": {
+                "tabWidth": 2
+            }
+        }
+    ],
+    "plugins": ["@trivago/prettier-plugin-sort-imports", "prettier-plugin-tailwindcss"],
+    "printWidth": 100,
+    "quoteProps": "consistent",
+    "semi": true,
+    "singleAttributePerLine": false,
+    "singleQuote": false,
+    "tabWidth": 4,
+    "trailingComma": "es5",
+    "useTabs": false
+}

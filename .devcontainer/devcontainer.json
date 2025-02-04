@@ -1,12 +1,12 @@
 {
-  "dockerComposeFile": "docker-compose.yaml",
-  "name": "C&I Expo AU",
-  "service": "devcontainer",
-  "workspaceFolder": "/workspaces",
-  "customizations": {
-    "vscode": {
-      "extensions": ["bradlc.vscode-tailwindcss"]
-    }
-  },
-  "postCreateCommand": "npm install"
+    "dockerComposeFile": "docker-compose.yaml",
+    "name": "C&I Expo AU",
+    "service": "devcontainer",
+    "workspaceFolder": "/workspaces",
+    "customizations": {
+        "vscode": {
+            "extensions": ["bradlc.vscode-tailwindcss"]
+        }
+    },
+    "postCreateCommand": "npm install"
 }
