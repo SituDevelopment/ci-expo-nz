@@ -1,4 +1,3 @@
-// storage-adapter-import-placeholder
 import { mongooseAdapter } from "@payloadcms/db-mongodb";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import { vercelBlobStorage } from "@payloadcms/storage-vercel-blob";
@@ -7,8 +6,17 @@ import { buildConfig } from "payload";
 import sharp from "sharp";
 import { fileURLToPath } from "url";
 
+import { Footer } from "./Footer/config";
+import { Header } from "./Header/config";
+import { Categories } from "./collections/Categories";
+import { Exhibitors } from "./collections/Exhibitors";
 import { Media } from "./collections/Media";
+import { Pages } from "./collections/Pages";
+import { Posts } from "./collections/Posts";
+import { Sponsors } from "./collections/Sponsors";
 import { Users } from "./collections/Users";
+import { plugins } from "./plugins";
+import { getServerSideURL } from "./utilities/getURL";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -20,7 +28,9 @@ export default buildConfig({
             baseDir: path.resolve(dirname),
         },
     },
-    collections: [Users, Media],
+    collections: [Pages, Posts, Categories, Media, Exhibitors, Sponsors, Users],
+    cors: [getServerSideURL()].filter(Boolean),
+    globals: [Header, Footer],
     editor: lexicalEditor(),
     secret: process.env.PAYLOAD_SECRET || "",
     typescript: {
@@ -31,6 +41,7 @@ export default buildConfig({
     }),
     sharp,
     plugins: [
+        ...plugins,
         vercelBlobStorage({
             enabled: true, // Optional, defaults to true
             // Specify which collections should use Vercel Blob

@@ -1,0 +1,51 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+    --color-primary-50: #fef2f2;
+    --color-primary-100: #fee2e3;
+    --color-primary-200: #fecacc;
+    --color-primary-300: #fca5a8;
+    --color-primary-400: #f77277;
+    --color-primary-500: #ee444b;
+    --color-primary-600: #d2222a;
+    --color-primary-700: #b81d23;
+    --color-primary-800: #981c21;
+    --color-primary-900: #7e1e22;
+    --color-primary-950: #450a0c;
+
+    --color-secondary-50: #ebfeff;
+    --color-secondary-100: #cdfaff;
+    --color-secondary-200: #a1f3ff;
+    --color-secondary-300: #60e8ff;
+    --color-secondary-400: #18d3f8;
+    --color-secondary-500: #00b6de;
+    --color-secondary-600: #009ac7;
+    --color-secondary-700: #087296;
+    --color-secondary-800: #105d7a;
+    --color-secondary-900: #124d67;
+    --color-secondary-950: #053247;
+}
+
+@theme inline {
+    --color-primary: var(--color-primary-600);
+    --color-secondary: var(--color-secondary-600);
+}
+
+@custom-variant dark (&:where([data-theme=dark] *, [data-theme=dark]):not([data-theme=light] *));
+
+@layer base {
+    html {
+        background: var(--color-white);
+        color: var(--color-neutral-800);
+
+        @variant dark {
+            background: var(--color-neutral-900);
+            color: var(--color-neutral-50);
+        }
+    }
+
+    .container {
+        @apply mx-auto;
+    }
+}
