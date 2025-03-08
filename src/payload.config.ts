@@ -13,6 +13,7 @@ import { Exhibitors } from "./collections/Exhibitors";
 import { Media } from "./collections/Media";
 import { Pages } from "./collections/Pages";
 import { Posts } from "./collections/Posts";
+import { Schedule } from "./collections/Schedule";
 import { Sponsors } from "./collections/Sponsors";
 import { Users } from "./collections/Users";
 import { plugins } from "./plugins";
@@ -28,7 +29,7 @@ export default buildConfig({
             baseDir: path.resolve(dirname),
         },
     },
-    collections: [Pages, Posts, Categories, Media, Exhibitors, Sponsors, Users],
+    collections: [Pages, Posts, Categories, Media, Exhibitors, Sponsors, Schedule, Users],
     cors: [getServerSideURL()].filter(Boolean),
     globals: [Header, Footer],
     editor: lexicalEditor(),

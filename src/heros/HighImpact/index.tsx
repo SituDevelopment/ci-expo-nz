@@ -13,9 +13,9 @@ export const HighImpactHero: React.FC<Page["hero"]> = ({ links, media, richText 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
-      className="relative flex items-center justify-center bg-black text-white"
+      className="relative flex aspect-[4/5] items-center justify-center overflow-hidden rounded-4xl bg-black text-center lg:aspect-[3/2]"
     >
-      <div className="relative z-10 mb-8 flex items-center justify-center">
+      <div className="relative z-10 mb-8 flex">
         <motion.div
           initial="hidden"
           animate="visible"
@@ -27,7 +27,7 @@ export const HighImpactHero: React.FC<Page["hero"]> = ({ links, media, richText 
               transition: { staggerChildren: 0.2, delayChildren: 0.5 },
             },
           }}
-          className="max-w-[36.5rem] md:text-center"
+          className="max-w-[36.5rem] p-6 md:text-center"
         >
           {richText && (
             <motion.div
@@ -36,11 +36,7 @@ export const HighImpactHero: React.FC<Page["hero"]> = ({ links, media, richText 
                 visible: { opacity: 1, y: 0 },
               }}
             >
-              <RichText
-                className="prose-invert mb-6"
-                data={richText}
-                enableGutter={false}
-              />
+              <RichText className="mb-6" data={richText} enableGutter={false} />
             </motion.div>
           )}
           <motion.dl
@@ -60,13 +56,14 @@ export const HighImpactHero: React.FC<Page["hero"]> = ({ links, media, richText 
               </dd>
             </div>
           </motion.dl>
+
           {Array.isArray(links) && links.length > 0 && (
             <motion.ul
               variants={{
                 hidden: { opacity: 0, y: 10 },
                 visible: { opacity: 1, y: 0, transition: { staggerChildren: 0.2 } },
               }}
-              className="mt-10 flex items-center justify-center gap-x-6"
+              className="mt-10 flex flex-col items-center justify-center gap-4 lg:flex-row lg:gap-x-6"
             >
               {links.map(({ link }, i) => (
                 <motion.li
@@ -75,19 +72,20 @@ export const HighImpactHero: React.FC<Page["hero"]> = ({ links, media, richText 
                     hidden: { opacity: 0, y: 10 },
                     visible: { opacity: 1, y: 0 },
                   }}
+                  className="w-full lg:w-auto"
                 >
-                  <CMSLink {...link} />
+                  <CMSLink {...link} className="w-full" />
                 </motion.li>
               ))}
             </motion.ul>
           )}
         </motion.div>
       </div>
-      <div className="min-h-[80vh] select-none">
+      <div className="select-none">
         {media && typeof media === "object" && (
           <Media
             fill
-            imgClassName="z-0 object-cover opacity-60"
+            imgClassName="z-0 object-cover opacity-35"
             priority
             resource={media}
           />

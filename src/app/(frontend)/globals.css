@@ -36,7 +36,7 @@
 
 @layer base {
     html {
-        background: var(--color-white);
+        background: var(--color-stone-50);
         color: var(--color-neutral-800);
 
         @variant dark {

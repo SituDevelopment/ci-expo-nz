@@ -28,5 +28,13 @@ export const Exhibitors: CollectionConfig = {
 				description: "Optional: Add a link to the Exhibitor\'s website.",
 			},
 		},
+		{
+			name: "description",
+			label: "Description",
+			type: "textarea",
+			admin: {
+				description: "Optional: Add a description to the Exhibitors's website.",
+			},
+		},
 	],
 };

@@ -72,6 +72,7 @@ export interface Config {
     media: Media;
     exhibitors: Exhibitor;
     sponsors: Sponsor;
+    schedule: Schedule;
     users: User;
     redirects: Redirect;
     forms: Form;
@@ -90,6 +91,7 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     exhibitors: ExhibitorsSelect<false> | ExhibitorsSelect<true>;
     sponsors: SponsorsSelect<false> | SponsorsSelect<true>;
+    schedule: ScheduleSelect<false> | ScheduleSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
@@ -233,8 +235,6 @@ export interface Post {
     };
     [k: string]: unknown;
   };
-  relatedPosts?: (string | Post)[] | null;
-  categories?: (string | Category)[] | null;
   meta?: {
     title?: string | null;
     /**
@@ -278,31 +278,11 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "categories".
- */
-export interface Category {
-  id: string;
-  title: string;
-  slug?: string | null;
-  slugLock?: boolean | null;
-  parent?: (string | null) | Category;
-  breadcrumbs?:
-    | {
-        doc?: (string | null) | Category;
-        url?: string | null;
-        label?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
 export interface User {
   id: string;
+  name?: string | null;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -469,6 +449,10 @@ export interface Sponsor {
    * Optional: Add a link to the Sponsor's website.
    */
   url?: string | null;
+  /**
+   * Optional: Add a description to the Sponsor's website.
+   */
+  description?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -484,6 +468,10 @@ export interface Exhibitor {
    * Optional: Add a link to the Exhibitor's website.
    */
   url?: string | null;
+  /**
+   * Optional: Add a description to the Exhibitors's website.
+   */
+  description?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -530,6 +518,27 @@ export interface ArchiveBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'archive';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "categories".
+ */
+export interface Category {
+  id: string;
+  title: string;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  parent?: (string | null) | Category;
+  breadcrumbs?:
+    | {
+        doc?: (string | null) | Category;
+        url?: string | null;
+        label?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -724,6 +733,34 @@ export interface Form {
           };
           [k: string]: unknown;
         } | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "schedule".
+ */
+export interface Schedule {
+  id: string;
+  scheduleName?: string | null;
+  days?:
+    | {
+        name: string;
+        date: string;
+        sessions?:
+          | {
+              title: string;
+              startTime: string;
+              endTime: string;
+              subtitle?: string | null;
+              description?: string | null;
+              location?: string | null;
+              id?: string | null;
+            }[]
+          | null;
         id?: string | null;
       }[]
     | null;
@@ -930,6 +967,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'sponsors';
         value: string | Sponsor;
+      } | null)
+    | ({
+        relationTo: 'schedule';
+        value: string | Schedule;
       } | null)
     | ({
         relationTo: 'users';
@@ -1165,8 +1206,6 @@ export interface PostsSelect<T extends boolean = true> {
   title?: T;
   heroImage?: T;
   content?: T;
-  relatedPosts?: T;
-  categories?: T;
   meta?:
     | T
     | {
@@ -1234,6 +1273,7 @@ export interface ExhibitorsSelect<T extends boolean = true> {
   name?: T;
   media?: T;
   url?: T;
+  description?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1245,6 +1285,34 @@ export interface SponsorsSelect<T extends boolean = true> {
   name?: T;
   media?: T;
   url?: T;
+  description?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "schedule_select".
+ */
+export interface ScheduleSelect<T extends boolean = true> {
+  scheduleName?: T;
+  days?:
+    | T
+    | {
+        name?: T;
+        date?: T;
+        sessions?:
+          | T
+          | {
+              title?: T;
+              startTime?: T;
+              endTime?: T;
+              subtitle?: T;
+              description?: T;
+              location?: T;
+              id?: T;
+            };
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1253,6 +1321,7 @@ export interface SponsorsSelect<T extends boolean = true> {
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
+  name?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;

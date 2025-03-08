@@ -28,5 +28,13 @@ export const Sponsors: CollectionConfig = {
 				description: "Optional: Add a link to the Sponsor's website.",
 			},
 		},
+		{
+			name: "description",
+			label: "Description",
+			type: "textarea",
+			admin: {
+				description: "Optional: Add a description to the Sponsor's website.",
+			},
+		},
 	],
 };
