@@ -1,26 +1,27 @@
 import type { Exhibitor, Sponsor, CollectionBlock as CollectionBlockProps } from "@/payload-types";
 import configPromise from "@payload-config";
-import { MoveRight } from "lucide-react";
 import { getPayload } from "payload";
 import React from "react";
 
-import { CMSLink } from "../../components/Link";
+import { CollectionBlockClient } from "./Component.client";
 
-export const CollectionBlock: React.FC<CollectionBlockProps & { id?: string }> = async (props) => {
+export async function CollectionBlock(props: CollectionBlockProps & { id?: string }) {
 	const {
 		id,
-		title,
 		collectionSelect,
 		displayMode,
 		limit: limitFromProps,
 		selectedItems,
+		title,
 		enableLink,
 		link,
+		blockType,
 	} = props;
+
 	const limit = limitFromProps || 100;
 	const payload = await getPayload({ config: configPromise });
 
-	let items: (Exhibitor | Sponsor)[] = [];
+	let items: (Exhibitor | Sponsor)[] = []; // Explicitly typed array
 
 	if (displayMode === "all") {
 		const fetchedItems = await payload.find({
@@ -29,60 +30,37 @@ export const CollectionBlock: React.FC<CollectionBlockProps & { id?: string }> =
 			limit,
 			sort: "name",
 		});
-		items = fetchedItems.docs as (Exhibitor | Sponsor)[]; // Explicitly cast the response
+		items = fetchedItems.docs as (Exhibitor | Sponsor)[]; // Explicit cast
 	} else if (selectedItems?.length) {
+		// Handle the complex type structure of selectedItems based on the config
 		items = selectedItems
-			.map((item) => (typeof item === "object" ? (item as Exhibitor | Sponsor) : null))
+			.map((item) => {
+				if (!item) return null;
+
+				if (typeof item === "object" && "value" in item) {
+					const value = item.value;
+					if (typeof value === "object" && value !== null) {
+						return value as Exhibitor | Sponsor;
+					}
+				} else if (typeof item === "object") {
+					return item as Exhibitor | Sponsor;
+				}
+				return null;
+			})
 			.filter(Boolean) as (Exhibitor | Sponsor)[];
 	}
 
+	// Pass props explicitly to match the client component's interface
 	return (
-		<div
-			className="my-16 rounded-[4rem] bg-white py-20 ring ring-neutral-200 sm:mt-32 sm:py-32 dark:ring-0"
-			id={`block-${id}`}
-			data-theme="light"
-		>
-			<div className="container mx-auto px-6 lg:px-8">
-				<div className="mx-auto max-w-2xl lg:max-w-none">
-					{title && (
-						<div className="flex items-center gap-x-8">
-							<h2 className="font-display text-center text-sm font-semibold tracking-wider text-neutral-800 sm:text-left">
-								{title}
-							</h2>
-							<div className="h-px flex-auto bg-neutral-200"></div>
-						</div>
-					)}
-					<div className="mt-12 grid grid-cols-2 gap-x-8 gap-y-10 lg:grid-cols-6">
-						{items.map((item) => (
-							<div key={item.id} className="">
-								{item.media && (
-									<img
-										src={item.media.url}
-										alt={item.media.alt}
-										className="h-20 self-start rounded-lg object-contain object-left"
-									/>
-								)}
-							</div>
-						))}
-					</div>
-
-					<div className="mt-16">
-						{enableLink && (
-							<CMSLink
-								{...link}
-								appearance="link"
-								className="group items-center gap-2 text-base font-semibold text-neutral-600"
-							>
-								<MoveRight
-									absoluteStrokeWidth
-									strokeWidth={0.5}
-									className="size-8 text-neutral-500 opacity-95 transition duration-500 group-hover:translate-x-2"
-								/>
-							</CMSLink>
-						)}
-					</div>
-				</div>
-			</div>
-		</div>
+		<CollectionBlockClient
+			id={id}
+			title={title}
+			enableLink={enableLink}
+			link={link}
+			items={items}
+			collectionSelect={collectionSelect}
+			displayMode={displayMode}
+			blockType={blockType}
+		/>
 	);
-};
+}

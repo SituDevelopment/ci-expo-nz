@@ -5,15 +5,14 @@ import { motion } from "motion/react";
 
 import { CMSLink } from "@/components/Link";
 import { Media } from "@/components/Media";
-import RichText from "@/components/RichText";
 
-export const HighImpactHero: React.FC<Page["hero"]> = ({ links, media, richText }) => {
+export const HighImpactHero: React.FC<Page["hero"]> = ({ title, links, media }) => {
   return (
     <motion.header
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
-      className="relative flex aspect-[4/5] items-center justify-center overflow-hidden rounded-4xl bg-black text-center lg:aspect-[3/2]"
+      className="relative flex items-center justify-center overflow-hidden rounded-4xl bg-black lg:h-[calc(100dvh-7.125rem)]"
     >
       <div className="relative z-10 mb-8 flex">
         <motion.div
@@ -29,16 +28,6 @@ export const HighImpactHero: React.FC<Page["hero"]> = ({ links, media, richText 
           }}
           className="max-w-[36.5rem] p-6 md:text-center"
         >
-          {richText && (
-            <motion.div
-              variants={{
-                hidden: { opacity: 0, y: 10 },
-                visible: { opacity: 1, y: 0 },
-              }}
-            >
-              <RichText className="mb-6" data={richText} enableGutter={false} />
-            </motion.div>
-          )}
           <motion.dl
             variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }}
             className="mt-4 grid grid-cols-2 gap-x-10 gap-y-6 sm:mt-6 sm:gap-x-16 sm:gap-y-10 sm:text-center lg:auto-cols-auto lg:grid-flow-col lg:grid-cols-none lg:justify-center lg:text-center"

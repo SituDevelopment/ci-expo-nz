@@ -155,21 +155,15 @@ export interface Page {
   title: string;
   hero: {
     type: 'none' | 'highImpact' | 'mediumImpact' | 'lowImpact';
-    richText?: {
-      root: {
-        type: string;
-        children: {
-          type: string;
-          version: number;
-          [k: string]: unknown;
-        }[];
-        direction: ('ltr' | 'rtl') | null;
-        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-        indent: number;
-        version: number;
-      };
-      [k: string]: unknown;
-    } | null;
+    title: string;
+    copy?: string | null;
+    chips?:
+      | {
+          title?: string | null;
+          content?: string | null;
+          id?: string | null;
+        }[]
+      | null;
     links?:
       | {
           link: {
@@ -1048,7 +1042,15 @@ export interface PagesSelect<T extends boolean = true> {
     | T
     | {
         type?: T;
-        richText?: T;
+        title?: T;
+        copy?: T;
+        chips?:
+          | T
+          | {
+              title?: T;
+              content?: T;
+              id?: T;
+            };
         links?:
           | T
           | {

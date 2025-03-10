@@ -32,7 +32,14 @@
     --color-secondary: var(--color-secondary-600);
 }
 
-@custom-variant dark (&:where([data-theme=dark] *, [data-theme=dark]):not([data-theme=light] *));
+@custom-variant dark (&:where(
+  [data-theme="dark"], /* Apply when element has data-theme="dark" */
+  [data-theme="dark"] *, /* Apply to children of data-theme="dark" */
+  :root:not([data-theme="light"]) [data-theme="dark"] * /* Apply to dark elements in any context */
+):not(
+  [data-theme="light"], /* Don't apply to light-themed elements */
+  [data-theme="light"] * /* Don't apply to children of light-themed elements */
+));
 
 @layer base {
     html {
@@ -41,7 +48,7 @@
 
         @variant dark {
             background: var(--color-neutral-900);
-            color: var(--color-neutral-50);
+            color: var(--color-stone-50);
         }
     }
 
