@@ -16,7 +16,7 @@ export const Schedule: CollectionConfig = {
 			name: "days",
 			type: "array",
 			minRows: 1,
-			maxRows: 3,
+			maxRows: 7,
 			fields: [
 				{
 					name: "name",

@@ -1,25 +1,28 @@
-import React from 'react'
-
-import type { Page } from '@/payload-types'
-
-import { HighImpactHero } from '@/heros/HighImpact'
-import { LowImpactHero } from '@/heros/LowImpact'
-import { MediumImpactHero } from '@/heros/MediumImpact'
+// RenderHero.tsx
+import { HighImpactHero } from "@/heros/HighImpact";
+import { LowImpactHero } from "@/heros/LowImpact";
+import { MediumImpactHero } from "@/heros/MediumImpact";
+import type { Page, Conferencedetail } from "@/payload-types";
+import { getCachedGlobal } from "@/utilities/getGlobals";
+import React from "react";
 
 const heroes = {
   highImpact: HighImpactHero,
   lowImpact: LowImpactHero,
   mediumImpact: MediumImpactHero,
-}
+};
 
-export const RenderHero: React.FC<Page['hero']> = (props) => {
-  const { type } = props || {}
+export async function RenderHero(props: Page["hero"]) {
+  const { type } = props || {};
 
-  if (!type || type === 'none') return null
+  if (!type || type === "none") return null;
 
-  const HeroToRender = heroes[type]
+  const HeroToRender = heroes[type];
+  if (!HeroToRender) return null;
 
-  if (!HeroToRender) return null
+  // Fetch conference details
+  const conferenceDetails = (await getCachedGlobal("conferencedetails", 1)()) as Conferencedetail;
 
-  return <HeroToRender {...props} />
+  // Pass the full conferenceDetails object to the hero component
+  return <HeroToRender {...props} conferenceDetails={conferenceDetails} />;
 }

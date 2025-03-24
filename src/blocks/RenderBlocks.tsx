@@ -3,7 +3,9 @@ import { CallToActionBlock } from "@/blocks/CallToAction/Component";
 import { CollectionBlock } from "@/blocks/CollectionBlock/Component";
 import { ContentBlock } from "@/blocks/Content/Component";
 import { FormBlock } from "@/blocks/Form/Component";
+import { GalleryBlock } from "@/blocks/GalleryBlock/Component";
 import { MediaBlock } from "@/blocks/MediaBlock/Component";
+import { ScheduleBlock } from "@/blocks/ScheduleBlock/Component";
 import { Page } from "@/payload-types";
 import React, { Fragment } from "react";
 
@@ -13,7 +15,9 @@ const blockComponents = {
 	collectionBlock: CollectionBlock,
 	cta: CallToActionBlock,
 	formBlock: FormBlock,
+	galleryBlock: GalleryBlock,
 	mediaBlock: MediaBlock,
+	scheduleBlock: ScheduleBlock,
 };
 
 export const RenderBlocks: React.FC<{

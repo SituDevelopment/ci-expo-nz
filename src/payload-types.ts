@@ -108,10 +108,12 @@ export interface Config {
   globals: {
     header: Header;
     footer: Footer;
+    conferencedetails: Conferencedetail;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
+    conferencedetails: ConferencedetailsSelect<false> | ConferencedetailsSelect<true>;
   };
   locale: null;
   user: User & {
@@ -157,13 +159,7 @@ export interface Page {
     type: 'none' | 'highImpact' | 'mediumImpact' | 'lowImpact';
     title: string;
     copy?: string | null;
-    chips?:
-      | {
-          title?: string | null;
-          content?: string | null;
-          id?: string | null;
-        }[]
-      | null;
+    toggleConferenceDetails?: boolean | null;
     links?:
       | {
           link: {
@@ -190,7 +186,32 @@ export interface Page {
       | null;
     media?: (string | null) | Media;
   };
-  layout: (CallToActionBlock | ContentBlock | CollectionBlock | MediaBlock | ArchiveBlock | FormBlock)[];
+  layout: (
+    | ArchiveBlock
+    | CallToActionBlock
+    | ContentBlock
+    | CollectionBlock
+    | {
+        galleryTitle?: string | null;
+        displayMode: 'carousel' | 'grid';
+        /**
+         * Add at least 4 images to your gallery
+         */
+        images?:
+          | {
+              image: string | Media;
+              caption?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'galleryBlock';
+      }
+    | FormBlock
+    | MediaBlock
+    | ScheduleBlock
+  )[];
   meta?: {
     title?: string | null;
     /**
@@ -287,6 +308,61 @@ export interface User {
   loginAttempts?: number | null;
   lockUntil?: string | null;
   password?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ArchiveBlock".
+ */
+export interface ArchiveBlock {
+  introContent?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  populateBy?: ('collection' | 'selection') | null;
+  relationTo?: 'posts' | null;
+  categories?: (string | Category)[] | null;
+  limit?: number | null;
+  selectedDocs?:
+    | {
+        relationTo: 'posts';
+        value: string | Post;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'archive';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "categories".
+ */
+export interface Category {
+  id: string;
+  title: string;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  parent?: (string | null) | Category;
+  breadcrumbs?:
+    | {
+        doc?: (string | null) | Category;
+        url?: string | null;
+        label?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -466,71 +542,6 @@ export interface Exhibitor {
    * Optional: Add a description to the Exhibitors's website.
    */
   description?: string | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "MediaBlock".
- */
-export interface MediaBlock {
-  media: string | Media;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'mediaBlock';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ArchiveBlock".
- */
-export interface ArchiveBlock {
-  introContent?: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  populateBy?: ('collection' | 'selection') | null;
-  relationTo?: 'posts' | null;
-  categories?: (string | Category)[] | null;
-  limit?: number | null;
-  selectedDocs?:
-    | {
-        relationTo: 'posts';
-        value: string | Post;
-      }[]
-    | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'archive';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "categories".
- */
-export interface Category {
-  id: string;
-  title: string;
-  slug?: string | null;
-  slugLock?: boolean | null;
-  parent?: (string | null) | Category;
-  breadcrumbs?:
-    | {
-        doc?: (string | null) | Category;
-        url?: string | null;
-        label?: string | null;
-        id?: string | null;
-      }[]
-    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -732,6 +743,28 @@ export interface Form {
     | null;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MediaBlock".
+ */
+export interface MediaBlock {
+  media: string | Media;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'mediaBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ScheduleBlock".
+ */
+export interface ScheduleBlock {
+  title?: string | null;
+  description?: string | null;
+  scheduleReference: string | Schedule;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'scheduleBlock';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1044,13 +1077,7 @@ export interface PagesSelect<T extends boolean = true> {
         type?: T;
         title?: T;
         copy?: T;
-        chips?:
-          | T
-          | {
-              title?: T;
-              content?: T;
-              id?: T;
-            };
+        toggleConferenceDetails?: T;
         links?:
           | T
           | {
@@ -1071,12 +1098,28 @@ export interface PagesSelect<T extends boolean = true> {
   layout?:
     | T
     | {
+        archive?: T | ArchiveBlockSelect<T>;
         cta?: T | CallToActionBlockSelect<T>;
         content?: T | ContentBlockSelect<T>;
         collectionBlock?: T | CollectionBlockSelect<T>;
-        mediaBlock?: T | MediaBlockSelect<T>;
-        archive?: T | ArchiveBlockSelect<T>;
+        galleryBlock?:
+          | T
+          | {
+              galleryTitle?: T;
+              displayMode?: T;
+              images?:
+                | T
+                | {
+                    image?: T;
+                    caption?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
         formBlock?: T | FormBlockSelect<T>;
+        mediaBlock?: T | MediaBlockSelect<T>;
+        scheduleBlock?: T | ScheduleBlockSelect<T>;
       };
   meta?:
     | T
@@ -1091,6 +1134,20 @@ export interface PagesSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ArchiveBlock_select".
+ */
+export interface ArchiveBlockSelect<T extends boolean = true> {
+  introContent?: T;
+  populateBy?: T;
+  relationTo?: T;
+  categories?: T;
+  limit?: T;
+  selectedDocs?: T;
+  id?: T;
+  blockName?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1168,6 +1225,17 @@ export interface CollectionBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FormBlock_select".
+ */
+export interface FormBlockSelect<T extends boolean = true> {
+  form?: T;
+  enableIntro?: T;
+  introContent?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "MediaBlock_select".
  */
 export interface MediaBlockSelect<T extends boolean = true> {
@@ -1177,26 +1245,12 @@ export interface MediaBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ArchiveBlock_select".
+ * via the `definition` "ScheduleBlock_select".
  */
-export interface ArchiveBlockSelect<T extends boolean = true> {
-  introContent?: T;
-  populateBy?: T;
-  relationTo?: T;
-  categories?: T;
-  limit?: T;
-  selectedDocs?: T;
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "FormBlock_select".
- */
-export interface FormBlockSelect<T extends boolean = true> {
-  form?: T;
-  enableIntro?: T;
-  introContent?: T;
+export interface ScheduleBlockSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  scheduleReference?: T;
   id?: T;
   blockName?: T;
 }
@@ -1671,6 +1725,36 @@ export interface Footer {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "conferencedetails".
+ */
+export interface Conferencedetail {
+  id: string;
+  startDate: string;
+  endDate: string;
+  contactDetails?: {
+    phone?: {
+      generalEnquiries?: string | null;
+      sponsorshipExhibition?: string | null;
+      sponsorshipContact?: string | null;
+    };
+    email?: {
+      generalEnquiries?: string | null;
+      sponsorshipExhibition?: string | null;
+      sponsorshipContact?: string | null;
+    };
+  };
+  location: {
+    venueName: string;
+    streetAddress: string;
+    suburb: string;
+    state: 'ACT' | 'NSW' | 'NT' | 'QLD' | 'SA' | 'TAS' | 'VIC' | 'WA';
+    postcode: string;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "header_select".
  */
 export interface HeaderSelect<T extends boolean = true> {
@@ -1725,6 +1809,44 @@ export interface FooterSelect<T extends boolean = true> {
               label?: T;
             };
         id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "conferencedetails_select".
+ */
+export interface ConferencedetailsSelect<T extends boolean = true> {
+  startDate?: T;
+  endDate?: T;
+  contactDetails?:
+    | T
+    | {
+        phone?:
+          | T
+          | {
+              generalEnquiries?: T;
+              sponsorshipExhibition?: T;
+              sponsorshipContact?: T;
+            };
+        email?:
+          | T
+          | {
+              generalEnquiries?: T;
+              sponsorshipExhibition?: T;
+              sponsorshipContact?: T;
+            };
+      };
+  location?:
+    | T
+    | {
+        venueName?: T;
+        streetAddress?: T;
+        suburb?: T;
+        state?: T;
+        postcode?: T;
       };
   updatedAt?: T;
   createdAt?: T;

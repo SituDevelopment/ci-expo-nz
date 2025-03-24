@@ -6,6 +6,7 @@ import { buildConfig } from "payload";
 import sharp from "sharp";
 import { fileURLToPath } from "url";
 
+import { ConferenceDetails } from "./Conference/config";
 import { Footer } from "./Footer/config";
 import { Header } from "./Header/config";
 import { Categories } from "./collections/Categories";
@@ -31,7 +32,7 @@ export default buildConfig({
     },
     collections: [Pages, Posts, Categories, Media, Exhibitors, Sponsors, Schedule, Users],
     cors: [getServerSideURL()].filter(Boolean),
-    globals: [Header, Footer],
+    globals: [Header, Footer, ConferenceDetails],
     editor: lexicalEditor(),
     secret: process.env.PAYLOAD_SECRET || "",
     typescript: {

@@ -72,7 +72,7 @@ export const CollectionBlockClient: React.FC<CollectionBlockClientProps> = (prop
 
 	return (
 		<div
-			className="my-16 rounded-[4rem] bg-white py-20 ring ring-neutral-200 sm:mt-32 sm:py-32 dark:ring-0"
+			className="my-16 rounded-[4rem] bg-white py-20 ring ring-neutral-200 sm:py-32 dark:ring-0"
 			id={`block-${id}`}
 			ref={containerRef}
 		>
@@ -116,27 +116,26 @@ export const CollectionBlockClient: React.FC<CollectionBlockClientProps> = (prop
 							</motion.div>
 						))}
 					</motion.div>
-					<div className="mt-16">
-						{enableLink && link && (
-							<motion.div
-								initial={{ opacity: 0 }}
-								animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-								transition={{ delay: 0.6, duration: 0.5 }}
+					{enableLink && link && (
+						<motion.div
+							initial={{ opacity: 0 }}
+							animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+							transition={{ delay: 0.6, duration: 0.5 }}
+							className="mt-16"
+						>
+							<CMSLink
+								{...link}
+								appearance="link"
+								className="group items-center gap-2 text-base font-semibold text-neutral-600"
 							>
-								<CMSLink
-									{...link}
-									appearance="link"
-									className="group items-center gap-2 text-base font-semibold text-neutral-600"
-								>
-									<MoveRight
-										absoluteStrokeWidth
-										strokeWidth={0.5}
-										className="size-8 text-neutral-500 opacity-95 transition duration-500 group-hover:translate-x-2"
-									/>
-								</CMSLink>
-							</motion.div>
-						)}
-					</div>
+								<MoveRight
+									absoluteStrokeWidth
+									strokeWidth={0.5}
+									className="size-8 text-neutral-500 opacity-95 transition duration-500 group-hover:translate-x-2"
+								/>
+							</CMSLink>
+						</motion.div>
+					)}
 				</div>
 			</div>
 		</div>

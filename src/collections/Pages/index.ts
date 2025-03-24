@@ -16,7 +16,9 @@ import { CallToAction } from "../../blocks/CallToAction/config";
 import { CollectionBlock } from "../../blocks/CollectionBlock/config";
 import { Content } from "../../blocks/Content/config";
 import { FormBlock } from "../../blocks/Form/config";
+import { GalleryBlock } from "../../blocks/GalleryBlock/config";
 import { MediaBlock } from "../../blocks/MediaBlock/config";
+import { ScheduleBlock } from "../../blocks/ScheduleBlock/config";
 import { populatePublishedAt } from "../../hooks/populatePublishedAt";
 import { generatePreviewPath } from "../../utilities/generatePreviewPath";
 import { revalidateDelete, revalidatePage } from "./hooks/revalidatePage";
@@ -76,12 +78,14 @@ export const Pages: CollectionConfig<"pages"> = {
               name: "layout",
               type: "blocks",
               blocks: [
+                Archive,
                 CallToAction,
                 Content,
                 CollectionBlock,
-                MediaBlock,
-                Archive,
+                GalleryBlock,
                 FormBlock,
+                MediaBlock,
+                ScheduleBlock,
               ],
               required: true,
               admin: {

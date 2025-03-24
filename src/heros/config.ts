@@ -41,20 +41,11 @@ export const hero: Field = {
       maxLength: 500,
     },
     {
-      name: "chips",
-      type: "array",
-      fields: [
-        {
-          name: "title",
-          type: "text",
-        },
-        {
-          name: "content",
-          type: "text",
-        },
-      ],
+      name: "toggleConferenceDetails",
+      type: "checkbox",
+      label: "Hide Conference Information in Header",
       admin: {
-        condition: (_, { type } = {}) => ["highImpact", "mediumImpact"].includes(type),
+        condition: (_, { type } = {}) => ["highImpact"].includes(type),
       },
     },
     linkGroup({
