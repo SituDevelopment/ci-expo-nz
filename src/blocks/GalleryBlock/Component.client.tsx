@@ -99,7 +99,7 @@ export const GalleryBlockClient: React.FC<GalleryBlockClientProps> = ({
 								navigation
 								pagination={{ clickable: true }}
 								onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
-								className="overflow-hidden rounded-lg"
+								className="overflow-hidden rounded-4xl"
 								effect="fade"
 							>
 								{images.map((item, index) => (
@@ -134,7 +134,7 @@ export const GalleryBlockClient: React.FC<GalleryBlockClientProps> = ({
 								<motion.div
 									key={`grid-item-${index}`}
 									variants={itemVariants}
-									className="overflow-hidden rounded-lg"
+									className="overflow-hidden rounded-4xl"
 								>
 									<div className="aspect-w-4 aspect-h-3 relative">
 										<Media

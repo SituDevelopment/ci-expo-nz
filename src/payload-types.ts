@@ -191,6 +191,7 @@ export interface Page {
     | CallToActionBlock
     | ContentBlock
     | CollectionBlock
+    | ConferenceDetailsBlock
     | {
         galleryTitle?: string | null;
         displayMode: 'carousel' | 'grid';
@@ -544,6 +545,17 @@ export interface Exhibitor {
   description?: string | null;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ConferenceDetailsBlock".
+ */
+export interface ConferenceDetailsBlock {
+  title?: string | null;
+  description?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'conferenceDetailsBlock';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1102,6 +1114,7 @@ export interface PagesSelect<T extends boolean = true> {
         cta?: T | CallToActionBlockSelect<T>;
         content?: T | ContentBlockSelect<T>;
         collectionBlock?: T | CollectionBlockSelect<T>;
+        conferenceDetailsBlock?: T | ConferenceDetailsBlockSelect<T>;
         galleryBlock?:
           | T
           | {
@@ -1220,6 +1233,16 @@ export interface CollectionBlockSelect<T extends boolean = true> {
         label?: T;
         appearance?: T;
       };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ConferenceDetailsBlock_select".
+ */
+export interface ConferenceDetailsBlockSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
   id?: T;
   blockName?: T;
 }

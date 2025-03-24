@@ -14,6 +14,7 @@ import { authenticatedOrPublished } from "../../access/authenticatedOrPublished"
 import { Archive } from "../../blocks/ArchiveBlock/config";
 import { CallToAction } from "../../blocks/CallToAction/config";
 import { CollectionBlock } from "../../blocks/CollectionBlock/config";
+import { ConferenceDetailsBlock } from "../../blocks/ConferenceDetails/config";
 import { Content } from "../../blocks/Content/config";
 import { FormBlock } from "../../blocks/Form/config";
 import { GalleryBlock } from "../../blocks/GalleryBlock/config";
@@ -82,6 +83,7 @@ export const Pages: CollectionConfig<"pages"> = {
                 CallToAction,
                 Content,
                 CollectionBlock,
+                ConferenceDetailsBlock,
                 GalleryBlock,
                 FormBlock,
                 MediaBlock,

@@ -1,6 +1,7 @@
 import { ArchiveBlock } from "@/blocks/ArchiveBlock/Component";
 import { CallToActionBlock } from "@/blocks/CallToAction/Component";
 import { CollectionBlock } from "@/blocks/CollectionBlock/Component";
+import { ConferenceDetailsBlock } from "@/blocks/ConferenceDetails/Component";
 import { ContentBlock } from "@/blocks/Content/Component";
 import { FormBlock } from "@/blocks/Form/Component";
 import { GalleryBlock } from "@/blocks/GalleryBlock/Component";
@@ -13,6 +14,7 @@ const blockComponents = {
 	archive: ArchiveBlock,
 	content: ContentBlock,
 	collectionBlock: CollectionBlock,
+	conferenceDetailsBlock: ConferenceDetailsBlock,
 	cta: CallToActionBlock,
 	formBlock: FormBlock,
 	galleryBlock: GalleryBlock,
