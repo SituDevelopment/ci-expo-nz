@@ -17,7 +17,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <link href="/favicon.ico" rel="icon" sizes="32x32" />
         <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
       </head>
-      <body className="grid min-h-dvh auto-rows-[min-content_1fr_min-content] gap-4">
+      <body className="grid min-h-dvh auto-rows-[min-content_1fr_min-content]">
         <Providers>
           <Header />
           {children}

@@ -209,6 +209,7 @@ export interface Page {
         blockName?: string | null;
         blockType: 'galleryBlock';
       }
+    | GridBlock
     | FormBlock
     | MediaBlock
     | ScheduleBlock
@@ -556,6 +557,55 @@ export interface ConferenceDetailsBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'conferenceDetailsBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "GridBlock".
+ */
+export interface GridBlock {
+  title?: string | null;
+  subtitle?: string | null;
+  richText?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  gridItems?:
+    | {
+        title?: string | null;
+        description?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        image: string | Media;
+        colSpan?: ('1' | '2') | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'gridBlock';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1130,6 +1180,7 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        gridBlock?: T | GridBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
         mediaBlock?: T | MediaBlockSelect<T>;
         scheduleBlock?: T | ScheduleBlockSelect<T>;
@@ -1243,6 +1294,26 @@ export interface CollectionBlockSelect<T extends boolean = true> {
 export interface ConferenceDetailsBlockSelect<T extends boolean = true> {
   title?: T;
   description?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "GridBlock_select".
+ */
+export interface GridBlockSelect<T extends boolean = true> {
+  title?: T;
+  subtitle?: T;
+  richText?: T;
+  gridItems?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+        colSpan?: T;
+        id?: T;
+      };
   id?: T;
   blockName?: T;
 }

@@ -5,6 +5,7 @@ import { ConferenceDetailsBlock } from "@/blocks/ConferenceDetails/Component";
 import { ContentBlock } from "@/blocks/Content/Component";
 import { FormBlock } from "@/blocks/Form/Component";
 import { GalleryBlock } from "@/blocks/GalleryBlock/Component";
+import { GridBlock } from "@/blocks/GridBlock/Component";
 import { MediaBlock } from "@/blocks/MediaBlock/Component";
 import { ScheduleBlock } from "@/blocks/ScheduleBlock/Component";
 import { Page } from "@/payload-types";
@@ -18,6 +19,7 @@ const blockComponents = {
 	cta: CallToActionBlock,
 	formBlock: FormBlock,
 	galleryBlock: GalleryBlock,
+	gridBlock: GridBlock,
 	mediaBlock: MediaBlock,
 	scheduleBlock: ScheduleBlock,
 };

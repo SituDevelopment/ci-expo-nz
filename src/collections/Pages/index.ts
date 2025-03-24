@@ -18,6 +18,7 @@ import { ConferenceDetailsBlock } from "../../blocks/ConferenceDetails/config";
 import { Content } from "../../blocks/Content/config";
 import { FormBlock } from "../../blocks/Form/config";
 import { GalleryBlock } from "../../blocks/GalleryBlock/config";
+import { GridBlock } from "../../blocks/GridBlock/config";
 import { MediaBlock } from "../../blocks/MediaBlock/config";
 import { ScheduleBlock } from "../../blocks/ScheduleBlock/config";
 import { populatePublishedAt } from "../../hooks/populatePublishedAt";
@@ -85,6 +86,7 @@ export const Pages: CollectionConfig<"pages"> = {
                 CollectionBlock,
                 ConferenceDetailsBlock,
                 GalleryBlock,
+                GridBlock,
                 FormBlock,
                 MediaBlock,
                 ScheduleBlock,
