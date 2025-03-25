@@ -1741,6 +1741,7 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  */
 export interface Header {
   id: string;
+  headerLogo?: (string | null) | Media;
   navItems?:
     | {
         link: {
@@ -1852,6 +1853,7 @@ export interface Conferencedetail {
  * via the `definition` "header_select".
  */
 export interface HeaderSelect<T extends boolean = true> {
+  headerLogo?: T;
   navItems?:
     | T
     | {

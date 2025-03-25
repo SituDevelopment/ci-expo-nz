@@ -83,19 +83,14 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
 		},
 	};
 
-	// Handle link click to close menu
-	const handleLinkClick = () => {
-		setMobileMenuOpen(false);
-	};
-
 	return (
 		<motion.header
-			initial={{ opacity: 0 }}
-			animate={{ opacity: 1 }}
+			initial={{ opacity: 0, y: -20 }}
+			animate={{ opacity: 1, y: 0 }}
 			transition={transition}
 			className="border-t-secondary relative sticky top-0 z-20 mb-6 border-t-3 px-4 md:px-6 lg:px-8"
 		>
-			<div className="-mx-[4px] flex flex-col rounded-b-4xl border-x border-b border-neutral-200 bg-neutral-50 ring ring-neutral-300/50 dark:bg-neutral-900/10">
+			<div className="-mx-[4px] flex flex-col rounded-b-4xl border-x border-b border-neutral-200 bg-neutral-50 dark:border-neutral-700 dark:bg-neutral-900">
 				{/* Main header content */}
 				<div className="grid grid-cols-12 items-center gap-2 px-4 py-4">
 					<div className="col-span-3 flex lg:col-span-2">
@@ -122,20 +117,17 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
 						<Button
 							size="clear"
 							variant="ghost"
-							className="inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+							className="inline-flex items-center justify-center rounded-md p-2.5 text-gray-700 dark:text-white"
 							onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
 						>
 							<span className="sr-only">
-								{mobileMenuOpen
-									? "Close menu"
-									: "Open main menu"}
+								{mobileMenuOpen ? "Close menu" : "Open main menu"}
 							</span>
-							{mobileMenuOpen
-								? <X aria-hidden="true" className="size-6" />
-								: <Menu
-									aria-hidden="true"
-									className="size-6"
-								/>}
+							{mobileMenuOpen ? (
+								<X aria-hidden="true" className="size-6" />
+							) : (
+								<Menu aria-hidden="true" className="size-6" />
+							)}
 						</Button>
 					</div>
 				</div>
@@ -144,7 +136,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
 				<AnimatePresence>
 					{mobileMenuOpen && (
 						<motion.div
-							className="border-t border-neutral-200 px-6 lg:hidden"
+							className="border-t border-neutral-200 px-6 lg:hidden dark:border-neutral-700"
 							variants={menuVariants}
 							initial="hidden"
 							animate="visible"
@@ -153,20 +145,16 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
 							<div className="py-6">
 								<nav className="flex flex-col space-y-5">
 									{data?.navItems?.map((item) => (
-										<motion.div
-											key={item.id}
-											variants={itemVariants}
-										>
+										<motion.div key={item.id} variants={itemVariants}>
 											<CMSLink
 												{...item.link}
-												className="block text-lg font-medium text-neutral-800 hover:text-neutral-600"
+												className="block text-lg font-medium text-neutral-800 hover:text-neutral-600 dark:text-neutral-200 dark:hover:text-neutral-50"
 											/>
 										</motion.div>
 									))}
 								</nav>
 
-								{data?.callToAction &&
-									data.callToAction.length > 0 && (
+								{data?.callToAction && data.callToAction.length > 0 && (
 									<motion.div
 										className="mt-8 border-t border-neutral-200 pt-6"
 										variants={itemVariants}
@@ -177,9 +165,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
 													key={cta.id}
 													{...cta.link}
 													className="inline-block rounded-full bg-neutral-800 px-5 py-2.5 text-center font-semibold text-white hover:bg-neutral-700"
-													appearance={cta.link
-														.appearance ||
-														"default"}
+													appearance={cta.link.appearance || "default"}
 												/>
 											))}
 										</div>

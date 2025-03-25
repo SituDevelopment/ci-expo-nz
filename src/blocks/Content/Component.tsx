@@ -10,14 +10,14 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
 
   const colsSpanClasses = {
     full: "lg:col-span-12",
-    half: "lg:col-span-6",
-    oneThird: "lg:col-span-4",
-    twoThirds: "lg:col-span-8",
+    half: "md:col-span-3 lg:col-span-6",
+    oneThird: "md:col-span-2 lg:col-span-4",
+    twoThirds: "md:col-span-4 lg:col-span-8",
   };
 
   return (
     <div className="container my-16">
-      <div className="grid grid-cols-4 gap-x-16 gap-y-8 lg:grid-cols-12">
+      <div className="grid grid-cols-6 gap-x-16 gap-y-8 lg:grid-cols-12">
         {columns &&
           columns.length > 0 &&
           columns.map((col, index) => {
@@ -25,9 +25,7 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
 
             return (
               <div
-                className={cn(`col-span-4 ${colsSpanClasses[size!]}`, {
-                  "md:col-span-2": size !== "full",
-                })}
+                className={cn(`col-span-full ${colsSpanClasses[size!]}`)}
                 key={index}
               >
                 {richText && <RichText data={richText} enableGutter={false} />}
