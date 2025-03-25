@@ -68,24 +68,26 @@ export const GridBlockClient: React.FC<GridBlockProps> = (props) => {
 		if (index === 0) return "max-lg:rounded-t-[2rem] lg:rounded-tl-[2rem]";
 
 		// Last item in the top row on desktop (usually index 2, but could be 1 if we have a wide item)
-		let itemsInTopRow = gridItems.slice(0, 3).filter((item, i) => {
+		const itemsInTopRow = gridItems.slice(0, 3).filter((item, i) => {
 			// If previous items have a colSpan of 2, they take up 2 spots
 			if (i === 0) return true;
-			let previousSpan = gridItems.slice(0, i).reduce((total, item) => {
+			const previousSpan = gridItems.slice(0, i).reduce((total, item) => {
 				return total + (item.colSpan === "2" ? 2 : 1);
 			}, 0);
 			return previousSpan < 3; // If previous items take less than 3 spots, this item is in top row
 		}).length;
 
-		let lastTopRowIndex = itemsInTopRow - 1;
+		const lastTopRowIndex = itemsInTopRow - 1;
 		if (index === lastTopRowIndex) return "lg:rounded-tr-[2rem]";
 
 		// First item in bottom row
-		let firstBottomRowIndex = itemsInTopRow;
+		const firstBottomRowIndex = itemsInTopRow;
 		if (index === firstBottomRowIndex) return "lg:rounded-bl-[2rem]";
 
 		// Last item (bottom right on desktop, bottom on mobile)
-		if (index === totalItems - 1) return "max-lg:rounded-b-[2rem] lg:rounded-br-[2rem]";
+		if (index === totalItems - 1) {
+			return "max-lg:rounded-b-[2rem] lg:rounded-br-[2rem]";
+		}
 
 		return "";
 	};
@@ -99,7 +101,9 @@ export const GridBlockClient: React.FC<GridBlockProps> = (props) => {
 					variants={headerVariants}
 				>
 					{subtitle && (
-						<h2 className="text-secondary-600 text-base/7 font-semibold">{subtitle}</h2>
+						<h2 className="text-secondary-600 text-base/7 font-semibold">
+							{subtitle}
+						</h2>
 					)}
 					{title && (
 						<p className="mt-2 max-w-lg text-4xl font-semibold tracking-tight text-pretty text-gray-950 sm:text-5xl">
@@ -120,25 +124,37 @@ export const GridBlockClient: React.FC<GridBlockProps> = (props) => {
 					animate={isInView ? "show" : "hidden"}
 				>
 					{gridItems.map((item, index) => {
-						const cornerClasses = getCornerClasses(index, gridItems.length);
+						const cornerClasses = getCornerClasses(
+							index,
+							gridItems.length,
+						);
 
 						return (
 							<motion.div
 								key={item.id || index}
-								className={`relative ${getColSpan(item.colSpan)}`}
+								className={`relative ${
+									getColSpan(item.colSpan)
+								}`}
 								variants={itemVariants}
 							>
 								<div
 									className={`absolute inset-px rounded-lg bg-white ${cornerClasses}`}
 								/>
 								<div
-									className={`relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)] ${cornerClasses.replace("rounded", "rounded-").replace(/\[/g, "[calc(").replace(/\]/g, "+1px)]")}`}
+									className={`relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)] ${
+										cornerClasses
+											.replace("rounded", "rounded-")
+											.replace(/\[/g, "[calc(")
+											.replace(/\]/g, "+1px)]")
+									}`}
 								>
 									{item.image && (
 										<Media
 											resource={item.image}
 											imgClassName="h-80 object-cover object-left"
-											alt={typeof item.title === "string" ? item.title : ""}
+											alt={typeof item.title === "string"
+												? item.title
+												: ""}
 										/>
 									)}
 									<div className="p-10 pt-4">
@@ -149,7 +165,9 @@ export const GridBlockClient: React.FC<GridBlockProps> = (props) => {
 										)}
 										{item.description && (
 											<div className="mt-2 max-w-lg text-sm/6 text-gray-600">
-												<RichText data={item.description} />
+												<RichText
+													data={item.description}
+												/>
 											</div>
 										)}
 									</div>

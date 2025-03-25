@@ -58,7 +58,7 @@ export default async function Page({ params: paramsPromise }: Args) {
   const { hero, layout } = page;
 
   return (
-    <main className="mb-8 grid grid-cols-subgrid px-4 md:px-6 lg:px-8">
+    <main className="mb-8 grid grid-cols-subgrid overflow-hidden px-4 md:px-6 lg:px-8">
       <PageClient />
       {/* Allows redirects for valid pages too */}
       <PayloadRedirects disableNotFound url={url} />

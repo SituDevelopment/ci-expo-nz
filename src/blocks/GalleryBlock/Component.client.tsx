@@ -4,11 +4,10 @@ import type { Media as MediaType } from "@/payload-types";
 import { motion, useInView } from "motion/react";
 import React, { useRef, useState } from "react";
 // Import Swiper styles
-import "swiper/css";
-import "swiper/css/effect-fade";
+
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { Navigation, Pagination, A11y, EffectFade } from "swiper/modules";
+import { Navigation, Pagination, A11y } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import { Media } from "@/components/Media";
@@ -68,7 +67,7 @@ export const GalleryBlockClient: React.FC<GalleryBlockClientProps> = ({
 	}
 
 	return (
-		<div className="my-16 py-12 sm:py-20" id={`block-${id}`} ref={containerRef}>
+		<div className="py-12 sm:py-20" id={`block-${id}`} ref={containerRef}>
 			<div className="container mx-auto px-6 lg:px-8">
 				<div className="mx-auto max-w-7xl">
 					{galleryTitle && (
@@ -93,20 +92,21 @@ export const GalleryBlockClient: React.FC<GalleryBlockClientProps> = ({
 							className="relative"
 						>
 							<Swiper
-								modules={[Navigation, Pagination, A11y, EffectFade]}
-								spaceBetween={30}
-								slidesPerView={1}
+								modules={[Navigation, Pagination, A11y]}
+								spaceBetween={24}
+								slidesPerView="auto"
 								navigation
 								pagination={{ clickable: true }}
 								onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
-								className="overflow-hidden rounded-4xl"
-								effect="fade"
+								className="w-full overflow-visible"
+								effect="slide"
 							>
 								{images.map((item, index) => (
 									<SwiperSlide key={`slide-${index}`}>
 										<div className="aspect-w-16 aspect-h-9 relative">
 											<Media
 												resource={item.image}
+												imgClassName="rounded-4xl"
 												className="object-cover"
 												priority={index === 0}
 											/>

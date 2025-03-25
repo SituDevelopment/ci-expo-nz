@@ -2,11 +2,11 @@
   "actions" : {
     "build" : {
       "enabled" : true,
-      "script" : "npm run build"
+      "script" : "#!\/bin\/sh\nnpm run build"
     },
     "run" : {
       "enabled" : true,
-      "script" : "npm run dev"
+      "script" : "#!\/bin\/sh\nnpm run dev"
     }
   }
 }

@@ -41,6 +41,8 @@
 ));
 
 @layer base {
+    @import "swiper/css";
+
     html {
         background: var(--color-stone-50);
         color: var(--color-neutral-800);
@@ -110,5 +112,13 @@
 
     .container {
         @apply mx-auto;
+    }
+
+    .swiper-slide {
+        @apply scale-95 opacity-50 transition duration-500;
+    }
+
+    .swiper-slide-active {
+        @apply scale-100 opacity-100;
     }
 }
