@@ -4,7 +4,7 @@ import { Tab } from "@headlessui/react";
 import clsx from "clsx";
 import { Calendar, Clock, MapPin } from "lucide-react";
 import { motion, useInView } from "motion/react";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 interface ScheduleBlockClientProps {
 	scheduleData: {
@@ -124,7 +124,9 @@ export const ScheduleBlockClient: React.FC<ScheduleBlockClientProps> = ({
 				<motion.div
 					className="mx-auto max-w-2xl lg:mx-0 lg:max-w-4xl lg:pr-24"
 					initial={{ opacity: 0, y: -20 }}
-					animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
+					animate={isInView
+						? { opacity: 1, y: 0 }
+						: { opacity: 0, y: -20 }}
 					transition={{ duration: 0.6, ease: "easeOut" }}
 				>
 					<h2 className="text-secondary-600 text-3xl font-bold tracking-tight sm:text-4xl">
@@ -135,7 +137,11 @@ export const ScheduleBlockClient: React.FC<ScheduleBlockClientProps> = ({
 							className="mt-4 text-xl text-gray-700"
 							initial={{ opacity: 0 }}
 							animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-							transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+							transition={{
+								duration: 0.6,
+								delay: 0.2,
+								ease: "easeOut",
+							}}
 						>
 							{description}
 						</motion.p>
@@ -152,31 +158,35 @@ export const ScheduleBlockClient: React.FC<ScheduleBlockClientProps> = ({
 						<Tab.List className="-mx-4 flex gap-x-4 gap-y-10 overflow-x-auto pb-4 pl-4 sm:mx-0 sm:flex-col sm:pr-8 sm:pb-0 sm:pl-0">
 							{({ selectedIndex }) => (
 								<>
-									{scheduleData.days.map((day, dayIndex) => (
+									{scheduleData.days?.map((day, dayIndex) => (
 										<motion.div
 											key={day.date}
 											className={clsx(
 												"relative w-3/4 flex-none pr-4 sm:w-auto sm:pr-0",
-												dayIndex !== selectedIndex && "opacity-70"
+												dayIndex !== selectedIndex &&
+													"opacity-70",
 											)}
 											initial={{ opacity: 0, x: -20 }}
-											animate={
-												isInView
-													? { opacity: 1, x: 0 }
-													: { opacity: 0, x: -20 }
-											}
-											transition={{ duration: 0.5, delay: 0.1 * dayIndex }}
+											animate={isInView
+												? { opacity: 1, x: 0 }
+												: { opacity: 0, x: -20 }}
+											transition={{
+												duration: 0.5,
+												delay: 0.1 * dayIndex,
+											}}
 										>
 											<div>
 												<h3 className="text-secondary-900 flex items-center text-2xl font-semibold tracking-tight">
 													<Tab className="focus:outline-none">
 														<span className="absolute inset-0" />
 														<Calendar className="mr-2 inline-block h-5 w-5" />
-														{day.name} - {formatDate(day.date)}
+														{day.name} -{" "}
+														{formatDate(day.date)}
 													</Tab>
 												</h3>
 												<p className="text-secondary-900 mt-1.5 text-base tracking-tight">
-													{day.sessions?.length} sessions
+													{day.sessions?.length}{" "}
+													sessions
 												</p>
 											</div>
 										</motion.div>
@@ -187,7 +197,10 @@ export const ScheduleBlockClient: React.FC<ScheduleBlockClientProps> = ({
 
 						<Tab.Panels>
 							{scheduleData.days.map((day) => (
-								<Tab.Panel key={day.date} className="focus:outline-none">
+								<Tab.Panel
+									key={day.date}
+									className="focus:outline-none"
+								>
 									<motion.div
 										variants={containerVariants}
 										initial="hidden"
@@ -225,7 +238,9 @@ export const ScheduleBlockClient: React.FC<ScheduleBlockClientProps> = ({
 										</h3>
 										<p className="text-secondary-900 mt-1.5 text-base tracking-tight">
 											{day.sessions?.length}{" "}
-											{day.sessions?.length === 1 ? "session" : "sessions"}
+											{day.sessions?.length === 1
+												? "session"
+												: "sessions"}
 										</p>
 									</div>
 								</div>
@@ -262,20 +277,26 @@ interface SessionsListProps {
 	variants?: any;
 }
 
-function SessionsList({ day, formatTime, className, variants }: SessionsListProps) {
+function SessionsList(
+	{ day, formatTime, className, variants }: SessionsListProps,
+) {
 	return (
 		<motion.ol
 			role="list"
 			className={clsx(
 				className,
-				"shadow-secondary-900/5 space-y-8 rounded-xl border border-gray-100 bg-white/60 px-10 py-14 text-center shadow-xl backdrop-blur-sm"
+				"shadow-secondary-900/5 space-y-8 rounded-xl border border-gray-100 bg-white/60 px-10 py-14 text-center shadow-xl backdrop-blur-sm",
 			)}
 			variants={variants}
 		>
 			{day.sessions?.map((session, sessionIndex) => (
 				<motion.li
 					key={`${session.startTime}-${sessionIndex}`}
-					aria-label={`${session.title} at ${formatTime(session.startTime)} - ${formatTime(session.endTime)}`}
+					aria-label={`${session.title} at ${
+						formatTime(
+							session.startTime,
+						)
+					} - ${formatTime(session.endTime)}`}
 					variants={variants}
 					custom={sessionIndex}
 					transition={{ delay: 0.1 * sessionIndex }}

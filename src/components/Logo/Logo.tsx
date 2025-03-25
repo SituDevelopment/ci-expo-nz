@@ -1,6 +1,8 @@
 import clsx from "clsx";
 import React from "react";
 
+import { Media } from "../Media";
+
 interface Props {
   className?: string;
   loading?: "lazy" | "eager";
@@ -8,7 +10,8 @@ interface Props {
 }
 
 export const Logo = (props: Props) => {
-  const { loading: loadingFromProps, priority: priorityFromProps, className } = props;
+  const { loading: loadingFromProps, priority: priorityFromProps, className } =
+    props;
 
   const loading = loadingFromProps || "lazy";
   const priority = priorityFromProps || "low";
@@ -33,7 +36,10 @@ export const Logo = (props: Props) => {
         loading={loading}
         fetchPriority={priority}
         decoding="async"
-        className={clsx("hidden h-16 w-full max-w-[12rem] dark:block", className)}
+        className={clsx(
+          "hidden h-16 w-full max-w-[12rem] dark:block",
+          className,
+        )}
         src="/api/media/file/whitelogo.png"
       />
     </>

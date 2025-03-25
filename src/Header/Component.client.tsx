@@ -2,7 +2,7 @@
 
 import type { Header } from "@/payload-types";
 import { Menu, X } from "lucide-react";
-import { motion, AnimatePresence } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import Link from "next/link";
 import React, { useState } from "react";
 
@@ -116,7 +116,6 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
 							key={cta.id}
 							{...cta.link}
 							appearance={cta.link.appearance || "link"}
-							onClick={handleLinkClick}
 						/>
 					))}
 					<div className="col-start-12 flex justify-center lg:hidden">
@@ -127,13 +126,16 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
 							onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
 						>
 							<span className="sr-only">
-								{mobileMenuOpen ? "Close menu" : "Open main menu"}
+								{mobileMenuOpen
+									? "Close menu"
+									: "Open main menu"}
 							</span>
-							{mobileMenuOpen ? (
-								<X aria-hidden="true" className="size-6" />
-							) : (
-								<Menu aria-hidden="true" className="size-6" />
-							)}
+							{mobileMenuOpen
+								? <X aria-hidden="true" className="size-6" />
+								: <Menu
+									aria-hidden="true"
+									className="size-6"
+								/>}
 						</Button>
 					</div>
 				</div>
@@ -151,17 +153,20 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
 							<div className="py-6">
 								<nav className="flex flex-col space-y-5">
 									{data?.navItems?.map((item) => (
-										<motion.div key={item.id} variants={itemVariants}>
+										<motion.div
+											key={item.id}
+											variants={itemVariants}
+										>
 											<CMSLink
 												{...item.link}
 												className="block text-lg font-medium text-neutral-800 hover:text-neutral-600"
-												onClick={handleLinkClick}
 											/>
 										</motion.div>
 									))}
 								</nav>
 
-								{data?.callToAction && data.callToAction.length > 0 && (
+								{data?.callToAction &&
+									data.callToAction.length > 0 && (
 									<motion.div
 										className="mt-8 border-t border-neutral-200 pt-6"
 										variants={itemVariants}
@@ -172,8 +177,9 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
 													key={cta.id}
 													{...cta.link}
 													className="inline-block rounded-full bg-neutral-800 px-5 py-2.5 text-center font-semibold text-white hover:bg-neutral-700"
-													appearance={cta.link.appearance || "default"}
-													onClick={handleLinkClick}
+													appearance={cta.link
+														.appearance ||
+														"default"}
 												/>
 											))}
 										</div>

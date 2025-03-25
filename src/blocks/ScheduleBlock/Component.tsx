@@ -15,10 +15,7 @@ export const ScheduleBlock: React.FC<ScheduleBlockComponentProps> = async ({
 	title,
 	description,
 }) => {
-	console.log("ScheduleReference received:", scheduleReference);
-
 	if (!scheduleReference) {
-		console.log("No scheduleReference provided, returning null");
 		return null;
 	}
 
@@ -33,10 +30,7 @@ export const ScheduleBlock: React.FC<ScheduleBlockComponentProps> = async ({
 			depth: 2, // Ensures we get `days` and `sessions`
 		});
 
-		console.log("Fetched Schedule:", schedule);
-
 		if (!schedule?.days?.length) {
-			console.log("Schedule has no days, returning null");
 			return null;
 		}
 
@@ -46,15 +40,14 @@ export const ScheduleBlock: React.FC<ScheduleBlockComponentProps> = async ({
 			days: schedule.days.map((day) => ({
 				name: day.name,
 				date: day.date,
-				sessions:
-					day.sessions?.map((session) => ({
-						title: session.title,
-						startTime: session.startTime,
-						endTime: session.endTime,
-						subtitle: session.subtitle || undefined,
-						description: session.description || undefined,
-						location: session.location || undefined,
-					})) || [],
+				sessions: day.sessions?.map((session) => ({
+					title: session.title,
+					startTime: session.startTime,
+					endTime: session.endTime,
+					subtitle: session.subtitle || undefined,
+					description: session.description || undefined,
+					location: session.location || undefined,
+				})) || [],
 			})),
 		};
 
