@@ -106,7 +106,7 @@ export const GalleryBlockClient: React.FC<GalleryBlockClientProps> = ({
 										<div className="aspect-w-16 aspect-h-9 relative">
 											<Media
 												resource={item.image}
-												imgClassName="rounded-4xl"
+												imgClassName="rounded-[4rem]"
 												className="object-cover"
 												priority={index === 0}
 											/>
@@ -134,7 +134,7 @@ export const GalleryBlockClient: React.FC<GalleryBlockClientProps> = ({
 								<motion.div
 									key={`grid-item-${index}`}
 									variants={itemVariants}
-									className="overflow-hidden rounded-4xl"
+									className="overflow-hidden rounded-[4rem]"
 								>
 									<div className="aspect-w-4 aspect-h-3 relative">
 										<Media

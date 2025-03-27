@@ -72,7 +72,7 @@ export const CollectionBlockClient: React.FC<CollectionBlockClientProps> = (prop
 
 	return (
 		<div
-			className="my-16 rounded-[4rem] bg-white py-20 ring ring-neutral-200 sm:py-32 dark:ring-0"
+			className="my-16 rounded-[4rem] bg-white py-20 ring ring-neutral-200 sm:py-32 dark:bg-neutral-800 dark:ring-neutral-700"
 			id={`block-${id}`}
 			ref={containerRef}
 		>
@@ -85,14 +85,14 @@ export const CollectionBlockClient: React.FC<CollectionBlockClientProps> = (prop
 							animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -10 }}
 							transition={{ duration: 0.5 }}
 						>
-							<h2 className="font-display text-center text-sm font-semibold tracking-wider text-neutral-800 sm:text-left">
+							<h2 className="font-display text-center text-sm font-semibold tracking-wider text-neutral-800 sm:text-left dark:text-neutral-100">
 								{title}
 							</h2>
-							<div className="h-px flex-auto bg-neutral-200"></div>
+							<div className="h-px flex-auto bg-neutral-200 dark:bg-neutral-700"></div>
 						</motion.div>
 					)}
 					<motion.div
-						className="mt-12 grid grid-cols-2 gap-x-8 gap-y-10 lg:grid-cols-6"
+						className="mt-12 grid grid-cols-2 gap-x-8 gap-y-10 sm:grid-cols-3 lg:grid-cols-6"
 						variants={containerVariants}
 						initial="hidden"
 						animate={isInView ? "show" : "hidden"}
@@ -110,7 +110,7 @@ export const CollectionBlockClient: React.FC<CollectionBlockClientProps> = (prop
 													? item.media.alt
 													: ""
 											}
-											className="h-20 self-start rounded-lg object-contain object-left"
+											className="h-20 self-start rounded-lg object-cover object-center ring ring-neutral-100 dark:ring-neutral-700"
 										/>
 									)}
 							</motion.div>

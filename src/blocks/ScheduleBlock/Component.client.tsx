@@ -124,17 +124,15 @@ export const ScheduleBlockClient: React.FC<ScheduleBlockClientProps> = ({
 				<motion.div
 					className="mx-auto max-w-2xl lg:mx-0 lg:max-w-4xl lg:pr-24"
 					initial={{ opacity: 0, y: -20 }}
-					animate={isInView
-						? { opacity: 1, y: 0 }
-						: { opacity: 0, y: -20 }}
+					animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
 					transition={{ duration: 0.6, ease: "easeOut" }}
 				>
-					<h2 className="text-secondary-600 text-3xl font-bold tracking-tight sm:text-4xl">
+					<h2 className="text-secondary dark:text-secondary-400">
 						{title || scheduleData.scheduleName}
 					</h2>
 					{description && (
 						<motion.p
-							className="mt-4 text-xl text-gray-700"
+							className="dark:text mt-4 text-xl text-neutral-700 dark:text-white"
 							initial={{ opacity: 0 }}
 							animate={isInView ? { opacity: 1 } : { opacity: 0 }}
 							transition={{
@@ -163,13 +161,14 @@ export const ScheduleBlockClient: React.FC<ScheduleBlockClientProps> = ({
 											key={day.date}
 											className={clsx(
 												"relative w-3/4 flex-none pr-4 sm:w-auto sm:pr-0",
-												dayIndex !== selectedIndex &&
-													"opacity-70",
+												dayIndex !== selectedIndex && "opacity-70"
 											)}
 											initial={{ opacity: 0, x: -20 }}
-											animate={isInView
-												? { opacity: 1, x: 0 }
-												: { opacity: 0, x: -20 }}
+											animate={
+												isInView
+													? { opacity: 1, x: 0 }
+													: { opacity: 0, x: -20 }
+											}
 											transition={{
 												duration: 0.5,
 												delay: 0.1 * dayIndex,
@@ -180,13 +179,11 @@ export const ScheduleBlockClient: React.FC<ScheduleBlockClientProps> = ({
 													<Tab className="focus:outline-none">
 														<span className="absolute inset-0" />
 														<Calendar className="mr-2 inline-block h-5 w-5" />
-														{day.name} -{" "}
-														{formatDate(day.date)}
+														{day.name} - {formatDate(day.date)}
 													</Tab>
 												</h3>
 												<p className="text-secondary-900 mt-1.5 text-base tracking-tight">
-													{day.sessions?.length}{" "}
-													sessions
+													{day.sessions?.length} sessions
 												</p>
 											</div>
 										</motion.div>
@@ -197,10 +194,7 @@ export const ScheduleBlockClient: React.FC<ScheduleBlockClientProps> = ({
 
 						<Tab.Panels>
 							{scheduleData.days.map((day) => (
-								<Tab.Panel
-									key={day.date}
-									className="focus:outline-none"
-								>
+								<Tab.Panel key={day.date} className="focus:outline-none">
 									<motion.div
 										variants={containerVariants}
 										initial="hidden"
@@ -233,14 +227,12 @@ export const ScheduleBlockClient: React.FC<ScheduleBlockClientProps> = ({
 								<div className="flex items-baseline gap-2">
 									<Calendar className="text-secondary-500 h-5 w-5" />
 									<div>
-										<h3 className="text-secondary-900 text-2xl font-semibold tracking-tight">
+										<h3 className="text-secondary-900 dark:text-secondary text-2xl font-semibold tracking-tight">
 											{day.name} - {formatDate(day.date)}
 										</h3>
-										<p className="text-secondary-900 mt-1.5 text-base tracking-tight">
+										<p className="text-secondary-900 dark:text-secondary-700 mt-1.5 text-base tracking-tight">
 											{day.sessions?.length}{" "}
-											{day.sessions?.length === 1
-												? "session"
-												: "sessions"}
+											{day.sessions?.length === 1 ? "session" : "sessions"}
 										</p>
 									</div>
 								</div>
@@ -277,38 +269,34 @@ interface SessionsListProps {
 	variants?: any;
 }
 
-function SessionsList(
-	{ day, formatTime, className, variants }: SessionsListProps,
-) {
+function SessionsList({ day, formatTime, className, variants }: SessionsListProps) {
 	return (
 		<motion.ol
 			role="list"
 			className={clsx(
 				className,
-				"shadow-secondary-900/5 space-y-8 rounded-xl border border-gray-100 bg-white/60 px-10 py-14 text-center shadow-xl backdrop-blur-sm",
+				"shadow-secondary-900/5 dark:border-secondary-400/10 dark:shadow-secondary-950/15 space-y-8 rounded-xl border border-neutral-100 bg-white/60 px-10 py-14 text-center shadow-xl backdrop-blur-sm dark:bg-neutral-800/60"
 			)}
 			variants={variants}
 		>
 			{day.sessions?.map((session, sessionIndex) => (
 				<motion.li
 					key={`${session.startTime}-${sessionIndex}`}
-					aria-label={`${session.title} at ${
-						formatTime(
-							session.startTime,
-						)
-					} - ${formatTime(session.endTime)}`}
+					aria-label={`${session.title} at ${formatTime(
+						session.startTime
+					)} - ${formatTime(session.endTime)}`}
 					variants={variants}
 					custom={sessionIndex}
 					transition={{ delay: 0.1 * sessionIndex }}
 				>
 					{sessionIndex > 0 && (
-						<div className="mx-auto mb-8 h-px w-48 bg-indigo-500/10" />
+						<div className="bg-secondary-500/10 dark:bg-secondary-300/20 mx-auto mb-8 h-px w-48" />
 					)}
-					<h4 className="text-secondary-900 text-lg font-semibold tracking-tight">
+					<h4 className="text-secondary-900 dark:text-secondary text-lg font-semibold tracking-tight">
 						{session.title}
 					</h4>
 					{session.subtitle && (
-						<p className="text-secondary-900 mt-1 tracking-tight italic">
+						<p className="text-secondary-900 dark:text-secondary mt-1 tracking-tight italic">
 							{session.subtitle}
 						</p>
 					)}
@@ -317,7 +305,7 @@ function SessionsList(
 							{session.description}
 						</p>
 					)}
-					<p className="mt-1 flex items-center justify-center font-mono text-sm text-slate-500">
+					<p className="mt-1 flex items-center justify-center font-mono text-sm text-neutral-500 dark:text-neutral-300">
 						<Clock className="mr-1 inline-block h-4 w-4" />
 						<time>{formatTime(session.startTime)}</time> -{" "}
 						<time>{formatTime(session.endTime)}</time>

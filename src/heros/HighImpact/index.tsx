@@ -58,7 +58,7 @@ export const HighImpactHero: React.FC<HighImpactHeroProps> = ({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
-      className="relative flex items-center justify-center overflow-hidden rounded-4xl bg-black lg:h-[75dvh] lg:min-h-[--spacing(160)]"
+      className="relative flex items-center justify-center overflow-hidden rounded-[4rem] bg-black lg:h-[75dvh] lg:min-h-[--spacing(160)]"
     >
       <div className="relative z-10 flex">
         <motion.div

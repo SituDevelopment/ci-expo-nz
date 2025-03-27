@@ -57,7 +57,7 @@ export const ConferenceDetailsBlockClient: React.FC<ConferenceDetailsBlockClient
 
 	return (
 		<section
-			className="my-16 rounded-[4rem] bg-white py-16 py-20 ring ring-neutral-200 sm:py-32 dark:ring-0"
+			className="my-16 rounded-[4rem] bg-white py-20 ring ring-neutral-200 sm:py-32 dark:bg-neutral-800 dark:ring-neutral-700"
 			id={`block-${id}`}
 			ref={containerRef}
 		>
@@ -65,7 +65,7 @@ export const ConferenceDetailsBlockClient: React.FC<ConferenceDetailsBlockClient
 				<div className="mx-auto max-w-2xl lg:max-w-none">
 					{title && (
 						<motion.h2
-							className="font-display mb-4 text-3xl font-semibold text-neutral-900 sm:text-4xl"
+							className="text-secondary"
 							initial={{ opacity: 0, y: -10 }}
 							animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -10 }}
 							transition={{ duration: 0.5 }}
@@ -75,7 +75,7 @@ export const ConferenceDetailsBlockClient: React.FC<ConferenceDetailsBlockClient
 					)}
 					{description && (
 						<motion.p
-							className="mt-4 mb-10 text-lg text-neutral-600"
+							className="mt-4 mb-10 text-lg text-neutral-600 dark:text-neutral-50"
 							initial={{ opacity: 0, y: -10 }}
 							animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -10 }}
 							transition={{ duration: 0.5, delay: 0.1 }}
@@ -92,18 +92,15 @@ export const ConferenceDetailsBlockClient: React.FC<ConferenceDetailsBlockClient
 					>
 						<dl className="grid max-w-xl gap-x-8 gap-y-10 sm:grid-cols-2 lg:max-w-none">
 							{/* Phone details */}
-							<motion.div className="relative pl-16" variants={itemVariants}>
-								<dt className="text-base leading-7 font-semibold text-zinc-900">
-									<div className="from-primary-500 to-primary-700 ring-secondary absolute top-0 left-0 flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br ring-1">
-										<Phone
-											className="text-primary-100 h-5 w-5"
-											strokeWidth={1.5}
-										/>
+							<motion.div className="relative" variants={itemVariants}>
+								<dt className="flex items-center gap-1 text-lg leading-7 tracking-wide text-neutral-900 dark:text-neutral-100">
+									<div className="flex items-center justify-center rounded-xl p-1.5">
+										<Phone className="text-primary size-5" strokeWidth={1.5} />
 									</div>
-									PHONE
+									Phone
 								</dt>
 								{phone?.generalEnquiries && (
-									<dd className="mt-2 text-base leading-7 text-zinc-600">
+									<dd className="mt-2 text-base leading-7 text-neutral-600 dark:text-neutral-200">
 										<strong>General Enquiries: </strong>
 										<a
 											href={`tel:${phone.generalEnquiries.replace(/\s/g, "")}`}
@@ -114,7 +111,7 @@ export const ConferenceDetailsBlockClient: React.FC<ConferenceDetailsBlockClient
 									</dd>
 								)}
 								{phone?.sponsorshipExhibition && (
-									<dd className="mt-2 text-base leading-7 text-zinc-600">
+									<dd className="mt-2 text-base leading-7 text-neutral-600 dark:text-neutral-200">
 										<strong>Sponsorship and Exhibition Enquiries: </strong>
 										<a
 											href={`tel:${phone.sponsorshipExhibition.replace(/\s/g, "")}`}
@@ -125,25 +122,22 @@ export const ConferenceDetailsBlockClient: React.FC<ConferenceDetailsBlockClient
 									</dd>
 								)}
 								{phone?.sponsorshipContact && (
-									<dd className="mt-2 text-base leading-7 text-zinc-600">
+									<dd className="mt-2 text-base leading-7 text-neutral-600 dark:text-neutral-200">
 										<i>{phone.sponsorshipContact}</i>
 									</dd>
 								)}
 							</motion.div>
 
 							{/* Email details */}
-							<motion.div className="relative pl-16" variants={itemVariants}>
-								<dt className="text-base leading-7 font-semibold text-zinc-900">
-									<div className="from-primary-500 to-primary-700 ring-secondary absolute top-0 left-0 flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br ring-1">
-										<Mail
-											className="text-primary-100 h-5 w-5"
-											strokeWidth={1.5}
-										/>
+							<motion.div className="relative" variants={itemVariants}>
+								<dt className="flex items-center gap-1 text-lg leading-7 tracking-wide text-neutral-900 dark:text-neutral-100">
+									<div className="flex items-center justify-center rounded-xl p-1.5">
+										<Mail className="text-primary size-5" strokeWidth={1.5} />
 									</div>
-									EMAIL
+									Email
 								</dt>
 								{email?.generalEnquiries && (
-									<dd className="mt-2 text-base leading-7 text-zinc-600">
+									<dd className="mt-2 text-base leading-7 text-neutral-600 dark:text-neutral-200">
 										<strong>General Enquiries: </strong>
 										<a
 											href={`mailto:${email.generalEnquiries}`}
@@ -154,7 +148,7 @@ export const ConferenceDetailsBlockClient: React.FC<ConferenceDetailsBlockClient
 									</dd>
 								)}
 								{email?.sponsorshipExhibition && (
-									<dd className="mt-2 text-base leading-7 text-zinc-600">
+									<dd className="mt-2 text-base leading-7 text-neutral-600 dark:text-neutral-200">
 										<strong>Sponsorship and Exhibition Enquiries: </strong>
 										<a
 											href={`mailto:${email.sponsorshipExhibition}`}
@@ -165,7 +159,7 @@ export const ConferenceDetailsBlockClient: React.FC<ConferenceDetailsBlockClient
 									</dd>
 								)}
 								{email?.sponsorshipContact && (
-									<dd className="mt-2 text-base leading-7 text-zinc-600">
+									<dd className="mt-2 text-base leading-7 text-neutral-600 dark:text-neutral-200">
 										<i>{email.sponsorshipContact}</i>
 									</dd>
 								)}

@@ -9,8 +9,8 @@ import { Logo } from "@/components/Logo/Logo";
 
 export async function Footer() {
   const footerData: Footer = await getCachedGlobal("footer", 1)();
-
   const navItems = footerData?.navItems || [];
+  const currentYear = new Date().getFullYear();
 
   return (
     <div>
@@ -45,6 +45,9 @@ export async function Footer() {
               <ThemeSelector />
             </div>
           </div>
+        </div>
+        <div className="container pt-6 pb-3 opacity-75">
+          Copyright © {currentYear} C&I Expo. All rights reserved.
         </div>
       </footer>
     </div>

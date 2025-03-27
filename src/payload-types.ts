@@ -612,8 +612,9 @@ export interface GridBlock {
  * via the `definition` "FormBlock".
  */
 export interface FormBlock {
-  form: string | Form;
-  enableIntro?: boolean | null;
+  formSource: 'formBuilder' | 'formEmbed';
+  form?: (string | null) | Form;
+  embedCode?: string | null;
   introContent?: {
     root: {
       type: string;
@@ -1322,8 +1323,9 @@ export interface GridBlockSelect<T extends boolean = true> {
  * via the `definition` "FormBlock_select".
  */
 export interface FormBlockSelect<T extends boolean = true> {
+  formSource?: T;
   form?: T;
-  enableIntro?: T;
+  embedCode?: T;
   introContent?: T;
   id?: T;
   blockName?: T;
