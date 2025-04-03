@@ -3,11 +3,12 @@
 import type { Media as MediaType } from "@/payload-types";
 import { motion, useInView } from "motion/react";
 import React, { useRef, useState } from "react";
-// Import Swiper styles
-
+import type { Swiper as SwiperType } from "swiper";
+import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { Navigation, Pagination, A11y } from "swiper/modules";
+import "swiper/css/thumbs";
+import { FreeMode, Navigation, Thumbs, Pagination, A11y } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import { Media } from "@/components/Media";
@@ -31,8 +32,9 @@ export const GalleryBlockClient: React.FC<GalleryBlockClientProps> = ({
 	images,
 }) => {
 	const containerRef = useRef(null);
-	const isInView = useInView(containerRef, { once: true, amount: 0.2 });
+	const isInView = useInView(containerRef, { once: true, amount: 0.5 });
 	const [activeIndex, setActiveIndex] = useState(0);
+	const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null);
 
 	// Animation variants
 	const containerVariants = {
@@ -69,91 +71,118 @@ export const GalleryBlockClient: React.FC<GalleryBlockClientProps> = ({
 	return (
 		<div className="py-12 sm:py-20" id={`block-${id}`} ref={containerRef}>
 			<div className="container mx-auto px-6 lg:px-8">
-				<div className="mx-auto max-w-7xl">
-					{galleryTitle && (
-						<motion.div
-							className="mb-10 flex items-center gap-x-8"
-							initial={{ opacity: 0, y: -10 }}
-							animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -10 }}
-							transition={{ duration: 0.5 }}
-						>
-							<h2 className="font-display text-center text-2xl font-semibold tracking-wider text-neutral-800 sm:text-left">
-								{galleryTitle}
-							</h2>
-							<div className="h-px flex-auto bg-neutral-200"></div>
-						</motion.div>
-					)}
+				{galleryTitle && (
+					<motion.div
+						className="mb-10 flex items-center gap-x-8"
+						initial={{ opacity: 0, y: -10 }}
+						animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -10 }}
+						transition={{ duration: 0.5 }}
+					>
+						<h2 className="font-display text-center text-2xl font-semibold tracking-wider text-neutral-800 sm:text-left">
+							{galleryTitle}
+						</h2>
+						<div className="h-px flex-auto bg-neutral-200"></div>
+					</motion.div>
+				)}
 
-					{displayMode === "carousel" ? (
-						<motion.div
-							initial={{ opacity: 0 }}
-							animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-							transition={{ duration: 0.8, delay: 0.2 }}
-							className="relative"
-						>
-							<Swiper
-								modules={[Navigation, Pagination, A11y]}
-								spaceBetween={24}
-								slidesPerView="auto"
-								navigation
-								pagination={{ clickable: true }}
-								onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
-								className="w-full overflow-visible"
-								effect="slide"
-							>
-								{images.map((item, index) => (
-									<SwiperSlide key={`slide-${index}`}>
-										<div className="aspect-w-16 aspect-h-9 relative">
-											<Media
-												resource={item.image}
-												imgClassName="rounded-[4rem]"
-												className="object-cover"
-												priority={index === 0}
-											/>
-											{item.caption && (
-												<div className="absolute right-0 bottom-0 left-0 bg-black/60 p-4 text-white">
-													<p className="text-sm sm:text-base">
-														{item.caption}
-													</p>
-												</div>
-											)}
-										</div>
-									</SwiperSlide>
-								))}
-							</Swiper>
-						</motion.div>
-					) : (
-						// Grid layout
-						<motion.div
-							className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
-							variants={containerVariants}
-							initial="hidden"
-							animate={isInView ? "show" : "hidden"}
+				{displayMode === "carousel" ? (
+					<motion.div
+						initial={{ opacity: 0 }}
+						animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+						transition={{ duration: 0.8, delay: 0.2 }}
+						className="relative"
+					>
+						{/* Main gallery Slider */}
+						<Swiper
+							style={
+								{
+									"--swiper-navigation-color": "var(--color-neutral-800)",
+									"--swiper-pagination-color": "var(--color-neutral-800)",
+								} as React.CSSProperties
+							}
+							modules={[FreeMode, Navigation, Thumbs, Pagination, A11y]}
+							spaceBetween={24}
+							navigation={true}
+							thumbs={{
+								swiper:
+									thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
+							}}
+							loop={true}
+							className="gallery-main-swiper mb-3 w-full overflow-visible"
+							effect="slide"
 						>
 							{images.map((item, index) => (
-								<motion.div
-									key={`grid-item-${index}`}
-									variants={itemVariants}
-									className="overflow-hidden rounded-[4rem]"
-								>
-									<div className="aspect-w-4 aspect-h-3 relative">
+								<SwiperSlide key={`slide-${index}`}>
+									<div className="relative">
 										<Media
 											resource={item.image}
-											className="object-cover transition-transform duration-500 hover:scale-105"
+											imgClassName="rounded-[4rem] object-cover aspect-video"
+											priority={index === 0}
 										/>
+										{item.caption && (
+											<div className="absolute right-0 bottom-0 left-0 bg-black/60 p-4 text-white">
+												<p className="text-sm sm:text-base">
+													{item.caption}
+												</p>
+											</div>
+										)}
 									</div>
-									{item.caption && (
-										<div className="bg-white p-4 dark:bg-neutral-800">
-											<p className="text-sm text-neutral-600 dark:text-neutral-300">
-												{item.caption}
-											</p>
-										</div>
-									)}
-								</motion.div>
+								</SwiperSlide>
 							))}
-						</motion.div>
-					)}
-				</div>
+						</Swiper>
+
+						{/* Thumbnail Slider */}
+						<Swiper
+							onSwiper={setThumbsSwiper}
+							modules={[FreeMode, Navigation, Thumbs]}
+							slidesPerView={8}
+							spaceBetween={12}
+							freeMode={true}
+							watchSlidesProgress={true}
+							loop={true}
+							className="gallery-thumbs-swiper overflow-visible"
+						>
+							{images.map((item, index) => (
+								<SwiperSlide key={`thumb-${index}`} className="cursor-pointer">
+									<Media
+										resource={item.image}
+										imgClassName="rounded-xl aspect-4/3 object-cover"
+									/>
+								</SwiperSlide>
+							))}
+						</Swiper>
+					</motion.div>
+				) : (
+					// Grid layout
+					<motion.div
+						className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
+						variants={containerVariants}
+						initial="hidden"
+						animate={isInView ? "show" : "hidden"}
+					>
+						{images.map((item, index) => (
+							<motion.div
+								key={`grid-item-${index}`}
+								variants={itemVariants}
+								className="overflow-hidden rounded-4xl"
+							>
+								<div className="aspect-w-4 aspect-h-3 relative">
+									<Media
+										resource={item.image}
+										className="object-cover transition-transform duration-500 hover:scale-105"
+									/>
+								</div>
+								{item.caption && (
+									<div className="bg-white p-4 dark:bg-neutral-800">
+										<p className="text-sm text-neutral-600 dark:text-neutral-300">
+											{item.caption}
+										</p>
+									</div>
+								)}
+							</motion.div>
+						))}
+					</motion.div>
+				)}
 			</div>
 		</div>
 	);

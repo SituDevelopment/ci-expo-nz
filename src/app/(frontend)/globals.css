@@ -114,11 +114,21 @@
         @apply mx-auto;
     }
 
-    .swiper-slide {
-        @apply scale-95 opacity-50 transition duration-500;
+    .gallery-main-swiper .swiper-slide {
+        @apply opacity-50 transition duration-500;
     }
 
-    .swiper-slide-active {
-        @apply scale-100 opacity-100;
+    .gallery-main-swiper .swiper-slide-active {
+        @apply opacity-100;
+    }
+
+    .gallery-thumbs-swiper {
+        & .swiper-slide:not(.swiper-slide-thumb-active) {
+            @apply opacity-50 hover:opacity-80;
+        }
+
+        & .swiper-slide-thumb-active {
+            @apply opacity-100;
+        }
     }
 }
