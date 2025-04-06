@@ -1,3 +1,5 @@
+import { Schedule } from "@/payload-types";
+// Import your existing type
 import configPromise from "@payload-config";
 import { getPayload } from "payload";
 import React from "react";
@@ -5,7 +7,7 @@ import React from "react";
 import { ScheduleBlockClient } from "./Component.client";
 
 export type ScheduleBlockComponentProps = {
-	scheduleReference: string;
+	scheduleReference: string | Schedule;
 	title?: string;
 	description?: string;
 };
@@ -23,10 +25,14 @@ export const ScheduleBlock: React.FC<ScheduleBlockComponentProps> = async ({
 		// Get a Payload instance using getPayload
 		const payload = await getPayload({ config: configPromise });
 
+		// Extract just the ID if scheduleReference is an object
+		const scheduleId =
+			typeof scheduleReference === "string" ? scheduleReference : scheduleReference.id;
+
 		// Fetch the full schedule with nested data
 		const schedule = await payload.findByID({
 			collection: "schedule",
-			id: scheduleReference,
+			id: scheduleId,
 			depth: 2, // Ensures we get `days` and `sessions`
 		});
 
@@ -40,14 +46,15 @@ export const ScheduleBlock: React.FC<ScheduleBlockComponentProps> = async ({
 			days: schedule.days.map((day) => ({
 				name: day.name,
 				date: day.date,
-				sessions: day.sessions?.map((session) => ({
-					title: session.title,
-					startTime: session.startTime,
-					endTime: session.endTime,
-					subtitle: session.subtitle || undefined,
-					description: session.description || undefined,
-					location: session.location || undefined,
-				})) || [],
+				sessions:
+					day.sessions?.map((session) => ({
+						title: session.title,
+						startTime: session.startTime,
+						endTime: session.endTime,
+						subtitle: session.subtitle || undefined,
+						description: session.description || undefined,
+						location: session.location || undefined,
+					})) || [],
 			})),
 		};
 

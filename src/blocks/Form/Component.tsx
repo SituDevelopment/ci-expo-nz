@@ -10,6 +10,9 @@ import { useForm, FormProvider } from "react-hook-form";
 import RichText from "@/components/RichText";
 import { Button } from "@/components/ui/button";
 
+import FormEmbed from "./FormEmbed.client";
+// Import the client component
+
 import { fields } from "./fields";
 
 export type FormBlockType = {
@@ -121,19 +124,8 @@ export const FormBlock: React.FC<
 		},
 		[router, formID, redirect, confirmationType]
 	);
-
-	// Create embedded form HTML content
-	const renderEmbeddedForm = () => {
-		if (!embedCode) return null;
-
-		return (
-			<div
-				className="embedded-form-container rounded-[4rem] border border-neutral-200 bg-white p-4 lg:px-8 lg:pt-12 lg:pb-10 dark:border-neutral-700 dark:bg-neutral-800"
-				dangerouslySetInnerHTML={{ __html: embedCode }}
-			/>
-		);
-	};
-
+	console.log("formSource:", formSource);
+	console.log("embedCode:", embedCode);
 	return (
 		<div className="py-20 sm:py-32">
 			<div className="container mx-auto grid grid-cols-6 gap-x-16 px-6 lg:grid-cols-12 lg:px-8">
@@ -190,7 +182,7 @@ export const FormBlock: React.FC<
 						</FormProvider>
 					) : (
 						// Render embedded form
-						renderEmbeddedForm()
+						<FormEmbed embedCode={embedCode || ""} />
 					)}
 				</div>
 			</div>

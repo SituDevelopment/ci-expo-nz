@@ -7,7 +7,7 @@ import RichText from "@/components/RichText";
 export const CallToActionBlock: React.FC<CTABlockProps> = ({ links, richText }) => {
   return (
     <div className="py-12">
-      <div className="border-border container flex flex-col gap-8 rounded p-4 md:flex-row md:items-center md:justify-between">
+      <div className="container flex flex-col gap-8 rounded border p-4 md:flex-row md:items-center md:justify-between">
         <div className="flex max-w-[48rem] items-center">
           {richText && <RichText className="mb-0" data={richText} enableGutter={false} />}
         </div>

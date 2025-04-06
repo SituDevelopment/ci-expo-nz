@@ -38,11 +38,11 @@ export const FormBlock: Block = {
 		{
 			name: "embedCode",
 			label: "Embed Code",
-			type: "textarea",
+			type: "code",
 			required: true,
 			admin: {
 				condition: (_, { formSource }) => formSource === "formEmbed",
-				rows: 40,
+				language: "html",
 			},
 		},
 		{

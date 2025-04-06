@@ -92,7 +92,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
 		>
 			<div className="-mx-[4px] flex flex-col rounded-b-4xl border-x border-b border-neutral-200 bg-neutral-50 dark:border-neutral-700 dark:bg-neutral-900">
 				{/* Main header content */}
-				<div className="grid grid-cols-12 items-center gap-2 px-4 py-4">
+				<div className="container grid grid-cols-12 items-center gap-2 px-4 py-4">
 					<div className="col-span-3 flex lg:col-span-2">
 						<Link href="/">
 							<Logo
