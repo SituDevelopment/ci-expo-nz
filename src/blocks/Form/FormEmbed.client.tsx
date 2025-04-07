@@ -48,7 +48,7 @@ const FormEmbed: React.FC<Props> = ({ embedCode }) => {
 	return (
 		<div
 			id="hubspot-form"
-			className="embedded-form-container rounded-[4rem] border border-neutral-200 bg-white p-4 py-8 lg:px-8 lg:pt-12 lg:pb-10 dark:border-neutral-700 dark:bg-neutral-800"
+			className="embedded-form-container rounded-[4rem] border border-neutral-200 bg-white px-6 pt-10 pb-6 lg:px-8 lg:pt-12 lg:pb-10 dark:border-neutral-700 dark:bg-neutral-800"
 		/>
 	);
 };

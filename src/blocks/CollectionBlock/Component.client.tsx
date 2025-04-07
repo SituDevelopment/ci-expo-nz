@@ -1,12 +1,14 @@
 "use client";
 
 import type { Exhibitor, Sponsor } from "@/payload-types";
-import { MoveRight } from "lucide-react";
+import { Dialog, Transition } from "@headlessui/react";
+import { ExternalLink, MoveRight, X } from "lucide-react";
 import { motion } from "motion/react";
 import { useInView } from "motion/react";
-import React, { useRef } from "react";
+import React, { Fragment, useRef, useState } from "react";
 
 import { CMSLink } from "../../components/Link";
+import { Media } from "../../components/Media";
 
 // Define interface that matches exactly what we need from the config.js
 interface CollectionBlockClientProps {
@@ -31,11 +33,29 @@ export const CollectionBlockClient: React.FC<CollectionBlockClientProps> = (prop
 	const containerRef = useRef(null);
 	const isInView = useInView(containerRef, { once: true, amount: 0.2 });
 
+	// Modal state
+	const [isOpen, setIsOpen] = useState(false);
+	const [selectedItem, setSelectedItem] = useState<Exhibitor | Sponsor | null>(null);
+
 	// Safety check for items array
 	if (!Array.isArray(items)) {
 		console.error("Expected items to be an array, got:", items);
 		return null;
 	}
+
+	// Function to open modal with selected item only if there's description or URL
+	const openModal = (item: Exhibitor | Sponsor) => {
+		// Only open the modal if there's a description or URL
+		if (item.description || item.url) {
+			setSelectedItem(item);
+			setIsOpen(true);
+		}
+	};
+
+	// Function to close modal
+	const closeModal = () => {
+		setIsOpen(false);
+	};
 
 	/*
 	 * Animation variants for container and items.
@@ -98,19 +118,20 @@ export const CollectionBlockClient: React.FC<CollectionBlockClientProps> = (prop
 						animate={isInView ? "show" : "hidden"}
 					>
 						{items.map((item) => (
-							<motion.div key={item.id} className="" variants={itemVariants}>
+							<motion.div key={item.id} variants={itemVariants}>
 								{item.media &&
 									typeof item.media === "object" &&
 									"url" in item.media &&
 									typeof item.media.url === "string" && (
 										<img
+											onClick={() => openModal(item)}
 											src={item.media.url}
 											alt={
 												typeof item.media.alt === "string"
 													? item.media.alt
 													: ""
 											}
-											className="h-20 self-start rounded-lg object-cover object-center ring ring-neutral-100 dark:ring-neutral-700"
+											className="h-20 cursor-pointer self-start rounded-lg object-cover object-center ring ring-neutral-100 transition duration-300 hover:scale-105 dark:ring-neutral-700"
 										/>
 									)}
 							</motion.div>
@@ -126,18 +147,116 @@ export const CollectionBlockClient: React.FC<CollectionBlockClientProps> = (prop
 							<CMSLink
 								{...link}
 								appearance="link"
-								className="group items-center gap-2 text-base font-semibold text-neutral-600"
+								className="group items-center gap-2 text-base font-semibold text-neutral-600 dark:text-neutral-300"
 							>
 								<MoveRight
 									absoluteStrokeWidth
 									strokeWidth={0.5}
-									className="size-8 text-neutral-500 opacity-95 transition duration-500 group-hover:translate-x-2"
+									className="size-8 text-neutral-500 opacity-95 transition duration-500 group-hover:translate-x-2 dark:text-neutral-400"
 								/>
 							</CMSLink>
 						</motion.div>
 					)}
 				</div>
 			</div>
+
+			{/* Modal */}
+			<Transition appear show={isOpen} as={Fragment}>
+				<Dialog as="div" className="relative z-50" onClose={closeModal}>
+					{/* Backdrop */}
+					<Transition.Child
+						as={Fragment}
+						enter="ease-out duration-300"
+						enterFrom="opacity-0"
+						enterTo="opacity-100"
+						leave="ease-in duration-200"
+						leaveFrom="opacity-100"
+						leaveTo="opacity-0"
+					>
+						<div className="fixed inset-0 bg-black/30 backdrop-blur-sm" />
+					</Transition.Child>
+
+					{/* Modal panel */}
+					<div className="fixed inset-0 overflow-y-auto">
+						<div className="flex min-h-full items-center justify-center p-4 text-center">
+							<Transition.Child
+								as={Fragment}
+								enter="ease-out duration-300"
+								enterFrom="opacity-0 scale-95"
+								enterTo="opacity-100 scale-100"
+								leave="ease-in duration-200"
+								leaveFrom="opacity-100 scale-100"
+								leaveTo="opacity-0 scale-95"
+							>
+								<Dialog.Panel className="w-full max-w-2xl transform overflow-hidden rounded-2xl border border-neutral-200 bg-white p-6 text-left align-middle shadow-2xl transition-all dark:border-neutral-700 dark:bg-neutral-900 dark:shadow-neutral-600/50">
+									{selectedItem && (
+										<>
+											<div className="flex items-center justify-between">
+												<Dialog.Title
+													as="h3"
+													className="text-secondary dark:text-secondary-400"
+												>
+													{selectedItem.name}
+												</Dialog.Title>
+												<button
+													type="button"
+													className="hover:text-primary-500 hover:bg-primary-100 dark:hover:bg-primary-800 dark:hover:text-primary-200 rounded-full p-1 text-neutral-400 focus:outline-none"
+													onClick={closeModal}
+												>
+													<X className="h-5 w-5" aria-hidden="true" />
+												</button>
+											</div>
+
+											<div className="mt-6 grid grid-cols-3 items-start gap-6">
+												{/* Media container */}
+												<div className="col-span-1 overflow-hidden rounded-lg border border-neutral-200 bg-neutral-50 p-4 dark:border-neutral-700 dark:bg-neutral-800">
+													{selectedItem.media &&
+														typeof selectedItem.media === "object" && (
+															<div className="flex justify-center">
+																<Media
+																	resource={selectedItem.media}
+																	imgClassName="max-h-60 max-w-full object-contain"
+																/>
+															</div>
+														)}
+												</div>
+												<div className="col-span-2">
+													{/* Description */}
+													{selectedItem.description && (
+														<div className="mb-6">
+															<h4 className="text-secondary-500 dark:text-secondary-400 mb-2">
+																About
+															</h4>
+															<p className="text-neutral-700 dark:text-neutral-300">
+																{selectedItem.description}
+															</p>
+														</div>
+													)}
+
+													{/* URL */}
+													{selectedItem.url && (
+														<div className="mt-4">
+															<a
+																href={selectedItem.url}
+																target="_blank"
+																rel="noopener noreferrer"
+																className="bg-primary hover:bg-primary-700 focus-visible:ring-primary-300 inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-neutral-700 focus:outline-none focus-visible:ring-2 dark:text-neutral-100"
+															>
+																Visit Website
+																<ExternalLink className="h-4 w-4" />
+															</a>
+														</div>
+													)}
+												</div>
+											</div>
+										</>
+									)}
+								</Dialog.Panel>
+							</Transition.Child>
+						</div>
+					</div>
+				</Dialog>
+			</Transition>
 		</div>
 	);
 };
