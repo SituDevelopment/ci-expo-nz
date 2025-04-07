@@ -240,7 +240,7 @@ export const CollectionBlockClient: React.FC<CollectionBlockClientProps> = (prop
 																href={selectedItem.url}
 																target="_blank"
 																rel="noopener noreferrer"
-																className="bg-primary hover:bg-primary-700 focus-visible:ring-primary-300 inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-neutral-700 focus:outline-none focus-visible:ring-2 dark:text-neutral-100"
+																className="bg-primary hover:bg-primary-700 focus-visible:ring-primary-300 text-primary-100 inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium focus:outline-none focus-visible:ring-2"
 															>
 																Visit Website
 																<ExternalLink className="h-4 w-4" />
