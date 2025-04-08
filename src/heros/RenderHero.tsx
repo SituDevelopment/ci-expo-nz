@@ -7,22 +7,22 @@ import { getCachedGlobal } from "@/utilities/getGlobals";
 import React from "react";
 
 const heroes = {
-  highImpact: HighImpactHero,
-  lowImpact: LowImpactHero,
-  mediumImpact: MediumImpactHero,
+    highImpact: HighImpactHero,
+    lowImpact: LowImpactHero,
+    mediumImpact: MediumImpactHero,
 };
 
 export async function RenderHero(props: Page["hero"]) {
-  const { type } = props || {};
+    const { type } = props || {};
 
-  if (!type || type === "none") return null;
+    if (!type || type === "none") return null;
 
-  const HeroToRender = heroes[type];
-  if (!HeroToRender) return null;
+    const HeroToRender = heroes[type];
+    if (!HeroToRender) return null;
 
-  // Fetch conference details
-  const conferenceDetails = (await getCachedGlobal("conferencedetails", 1)()) as Conferencedetail;
+    // Fetch conference details
+    const conferenceDetails = (await getCachedGlobal("conferencedetails", 1)()) as Conferencedetail;
 
-  // Pass the full conferenceDetails object to the hero component
-  return <HeroToRender {...props} conferenceDetails={conferenceDetails} />;
+    // Pass the full conferenceDetails object to the hero component
+    return <HeroToRender {...props} conferenceDetails={conferenceDetails} />;
 }
