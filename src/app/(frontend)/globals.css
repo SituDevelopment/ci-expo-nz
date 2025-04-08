@@ -1,0 +1,134 @@
+@import "tailwindcss";
+
+@theme {
+    --color-primary-50: oklch(97.05% 0.0129 17.38);
+    --color-primary-100: oklch(93.59% 0.0309 15.25);
+    --color-primary-200: oklch(88.51% 0.0592 15.75);
+    --color-primary-300: oklch(80.84% 0.1033 17.35);
+    --color-primary-400: oklch(71.18% 0.1634 19.87);
+    --color-primary-500: oklch(60.15% 0.2075 23.19);
+    --color-primary-600: oklch(55.68% 0.2082 25.67);
+    --color-primary-700: oklch(50.48% 0.1883 25.89);
+    --color-primary-800: oklch(44.32% 0.159 24.98);
+    --color-primary-900: oklch(39.57% 0.1305 23.43);
+    --color-primary-950: oklch(25.78% 0.0883 24.42);
+
+    --color-secondary-50: #ebfeff;
+    --color-secondary-100: #cdfaff;
+    --color-secondary-200: #a1f3ff;
+    --color-secondary-300: #60e8ff;
+    --color-secondary-400: #18d3f8;
+    --color-secondary-500: #00b6de;
+    --color-secondary-600: #009ac7;
+    --color-secondary-700: #087296;
+    --color-secondary-800: #105d7a;
+    --color-secondary-900: #124d67;
+    --color-secondary-950: #053247;
+}
+
+@theme inline {
+    --color-primary: var(--color-primary-600);
+    --color-secondary: var(--color-secondary-600);
+}
+
+@custom-variant dark (&:where(
+  [data-theme="dark"], /* Apply when element has data-theme="dark" */
+  [data-theme="dark"] *, /* Apply to children of data-theme="dark" */
+  :root:not([data-theme="light"]) [data-theme="dark"] * /* Apply to dark elements in any context */
+):not(
+  [data-theme="light"], /* Don't apply to light-themed elements */
+  [data-theme="light"] * /* Don't apply to children of light-themed elements */
+));
+
+@layer base {
+    @import "swiper/css";
+
+    html {
+        background: var(--color-stone-50);
+        color: var(--color-neutral-800);
+
+        @variant dark {
+            background: var(--color-neutral-900);
+            color: var(--color-stone-50);
+        }
+    }
+
+    h1 {
+        font-size: var(--text-5xl);
+        margin: --spacing(3) 0 --spacing(5);
+    }
+
+    h2 {
+        font-size: var(--text-4xl);
+        margin: --spacing(2) 0 --spacing(4);
+    }
+
+    h3 {
+        font-size: var(--text-3xl);
+        margin: --spacing(1) 0 --spacing(3);
+    }
+
+    h4 {
+        font-size: var(--text-xl);
+        margin: --spacing(1) 0 --spacing(2);
+    }
+
+    h5 {
+        font-size: var(--text-lg);
+        margin: --spacing(0.5) 0 --spacing(1);
+    }
+
+    /* First heading has less top margin when it follows another heading */
+    h1 + h2,
+    h1 + h3,
+    h1 + h4,
+    h1 + h5,
+    h2 + h3,
+    h2 + h4,
+    h2 + h5,
+    h3 + h4,
+    h3 + h5,
+    h4 + h5 {
+        margin-top: --spacing(1);
+    }
+
+    p {
+        font-size: var(--text-lg);
+        margin-top: --spacing(3);
+
+        /* First paragraph after a heading gets a small margin */
+        h1 + &,
+        h2 + &,
+        h3 + &,
+        h4 + &,
+        h5 + & {
+            margin-top: --spacing(2);
+        }
+
+        &:not(:last-of-type) {
+            margin-bottom: --spacing(4);
+        }
+    }
+
+    .container {
+        @apply mx-auto;
+    }
+
+    .gallery-main-swiper .swiper-slide {
+        @apply opacity-50 transition duration-500;
+    }
+
+    .gallery-main-swiper .swiper-slide-active {
+        @apply opacity-100;
+    }
+
+    .gallery-thumbs-swiper {
+        & .swiper-slide:not(.swiper-slide-thumb-active) {
+            @apply opacity-50 hover:opacity-80;
+        }
+
+        & .swiper-slide-thumb-active {
+            @apply opacity-100;
+        }
+    }
+}
