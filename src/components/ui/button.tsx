@@ -23,10 +23,10 @@ const buttonVariants = cva(
                     "bg-primary text-primary-50 hover:bg-primary-500 hover:ring ring-0 ring-primary-500",
                 destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
                 ghost: "hover:bg-neutral-100 hover:text-primary",
-                link: "text-secondary dark:text-secondary-300 items-start justify-start underline-offset-4 hover:underline",
+                link: "text-primary dark:text-primary-300 items-start justify-start underline-offset-4 hover:underline",
                 outline:
                     "border border-neutral-800 bg-white/0 hover:bg-white hover:text-neutral-950 text-current dark:border-white dark:text-current dark:hover:text-neutral-950",
-                secondary: "bg-secondary text-secondary-50 hover:bg-secondary/80",
+                secondary: "bg-primary text-primary-50 hover:bg-primary/80",
             },
         },
     }

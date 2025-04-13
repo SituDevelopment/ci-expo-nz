@@ -10,8 +10,8 @@ const defaultOpenGraph: Metadata["openGraph"] = {
             url: `${getServerSideURL()}/website-template-OG.webp`,
         },
     ],
-    siteName: "C I Expo",
-    title: "Payload Website Template",
+    siteName: "C&I Expo",
+    title: "C&I Expo New Zealand 2026",
 };
 
 export const mergeOpenGraph = (og?: Metadata["openGraph"]): Metadata["openGraph"] => {

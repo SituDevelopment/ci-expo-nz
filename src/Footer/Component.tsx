@@ -17,14 +17,12 @@ export async function Footer() {
             <div className="border-t border-neutral-200 bg-white px-4 py-4 sm:py-8 md:px-6 md:py-12 lg:px-8 lg:py-16 dark:border-neutral-700 dark:bg-neutral-800">
                 <div className="container">
                     <div className="grid grid-cols-6 gap-x-16 lg:grid-cols-12">
-                        <h2 className="text-secondary-600 dark:text-secondary-300 col-span-full mt-0 lg:col-span-4">
+                        <h2 className="text-primary-600 dark:text-primary-300 col-span-full mt-0 lg:col-span-4">
                             Acknowledgement of Country
                         </h2>
                         <p className="col-span-full text-xl/8 font-light text-balance text-neutral-600 lg:col-span-8 dark:text-neutral-50">
-                            We acknowledge the traditional custodians of country throughout
-                            Australia and their ongoing connection to land, waters and community. We
-                            pay our respects to the people, the cultures and the Elders past,
-                            present and emerging.
+                            C&I Media acknowledges ngā iwi ō Māori as the tangata whenua of Aotearoa
+                            / New Zealand, and their rich contribution to society.
                         </p>
                     </div>
                 </div>
@@ -33,7 +31,7 @@ export async function Footer() {
             <footer className="mt-auto border-t border-neutral-200 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white">
                 <div className="container flex flex-col items-center gap-8 py-8 md:flex-row md:justify-between">
                     <Link className="flex items-center" href="/">
-                        <Logo className="object-contain object-left" />
+                        <Logo className="rounded-xl object-contain object-left ring ring-neutral-200" />
                     </Link>
                     <nav className="flex flex-col gap-4 md:flex-row">
                         {navItems.map(({ link }, i) => {

@@ -117,13 +117,13 @@ export const HighImpactHero: React.FC<HighImpactHeroProps> = ({
                             className="mt-8 grid grid-cols-2 gap-x-10 gap-y-6 sm:mt-12 sm:gap-x-16 sm:gap-y-10 sm:text-center lg:auto-cols-auto lg:grid-flow-col lg:grid-cols-none lg:justify-center lg:text-center"
                         >
                             <div>
-                                <dt className="text-secondary-600 text-base">Dates</dt>
+                                <dt className="text-primary-600 text-base">Dates</dt>
                                 <dd className="mt-0.5 text-2xl font-semibold tracking-tight text-white">
                                     {dateDisplay}
                                 </dd>
                             </div>
                             <div>
-                                <dt className="text-secondary-600 text-base">Location</dt>
+                                <dt className="text-primary-600 text-base">Location</dt>
                                 <dd className="mt-0.5 text-2xl font-semibold tracking-tight text-white">
                                     {venueDisplay}
                                 </dd>
@@ -168,7 +168,7 @@ export const HighImpactHero: React.FC<HighImpactHeroProps> = ({
                             ))}
                         </motion.ul>
                     )}
-                    <hr className="my-6 border-white opacity-50 lg:my-8" />
+                    <hr className="my-6 hidden border-white opacity-50 lg:my-8" />
                     <motion.div
                         variants={{
                             hidden: { opacity: 0, y: 15 },
@@ -184,14 +184,14 @@ export const HighImpactHero: React.FC<HighImpactHeroProps> = ({
                         }}
                         className="hidden sm:mb-8 sm:flex sm:justify-center"
                     >
-                        <div className="relative flex items-center gap-4 rounded-full bg-white/10 px-5 py-3 text-sm/6 text-gray-100 ring-1 ring-white/20 backdrop-blur hover:ring-gray-100/20">
+                        <div className="relative flex hidden items-center gap-4 rounded-full bg-white/10 px-5 py-3 text-sm/6 text-gray-100 ring-1 ring-white/20 backdrop-blur hover:ring-gray-100/20">
                             <span className="text-lg font-semibold tracking-wide">
                                 Co-locating with AACS
                             </span>
                             <a
                                 target="_blank"
                                 href="https://aacs.org.au"
-                                className="text-secondary-500 hover:text-secondary-600 group inline-flex items-start gap-1.5 font-semibold transition"
+                                className="text-primary-500 hover:text-primary-600 group inline-flex items-start gap-1.5 font-semibold transition"
                             >
                                 <img
                                     className="pointer-events-none inline-flex w-18 object-contain transition duration-300 group-hover:scale-[1.02]"

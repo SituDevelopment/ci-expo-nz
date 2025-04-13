@@ -31,6 +31,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 export const metadata: Metadata = {
     metadataBase: new URL(getServerSideURL()),
     openGraph: mergeOpenGraph(),
+    title: "C&I Expo New Zealand 2026",
+    themeColor: "#289137",
     twitter: {
         card: "summary_large_image",
         creator: "@payloadcms",

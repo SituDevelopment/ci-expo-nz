@@ -90,7 +90,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
             transition={transition}
             className="border-t-secondary relative sticky top-0 z-20 mb-6 border-t-3 px-4 md:px-6 lg:px-8"
         >
-            <div className="-mx-[4px] flex flex-col rounded-b-4xl border-x border-b border-neutral-200 bg-neutral-50 dark:border-neutral-700 dark:bg-neutral-900">
+            <div className="-mx-[4px] flex flex-col rounded-b-4xl border-x border-b border-neutral-200 bg-white dark:border-neutral-700 dark:bg-neutral-900">
                 {/* Main header content */}
                 <div className="container grid grid-cols-12 items-center gap-2 px-4 py-4">
                     <div className="col-span-3 flex lg:col-span-2">
