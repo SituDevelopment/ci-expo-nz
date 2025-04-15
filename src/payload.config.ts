@@ -29,6 +29,14 @@ export default buildConfig({
         importMap: {
             baseDir: path.resolve(dirname),
         },
+        timezones: {
+            defaultTimezone: "Australia/Sydney",
+        },
+        components: {
+            graphics: {
+                Logo: "/components/payload/LoginLogo",
+            },
+        },
     },
     collections: [Pages, Posts, Categories, Media, Exhibitors, Sponsors, Schedule, Users],
     cors: [getServerSideURL()].filter(Boolean),

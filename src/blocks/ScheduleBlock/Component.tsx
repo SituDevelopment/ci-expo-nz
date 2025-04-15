@@ -44,7 +44,7 @@ export const ScheduleBlock: React.FC<ScheduleBlockComponentProps> = async ({
         const formattedSchedule = {
             scheduleName: schedule.scheduleName || null,
             days: schedule.days.map((day) => ({
-                name: day.name,
+                name: day.name || undefined,
                 date: day.date,
                 sessions:
                     day.sessions?.map((session) => ({
