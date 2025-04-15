@@ -188,6 +188,32 @@ export interface Page {
               }[]
             | null;
         media?: (string | null) | Media;
+        /**
+         * The "Announcement Bar" is the small text & logo section beneath the Button Group.
+         */
+        announcementBarSettings?: {
+            toggleAnnouncementBar?: boolean | null;
+            customiseAnnouncementBar?: boolean | null;
+            customisationOptions?: {
+                announcementText?: string | null;
+                addImage?: boolean | null;
+                logo?: (string | null) | Media;
+                link?: {
+                    type?: ("reference" | "custom") | null;
+                    newTab?: boolean | null;
+                    reference?:
+                        | ({
+                              relationTo: "pages";
+                              value: string | Page;
+                          } | null)
+                        | ({
+                              relationTo: "posts";
+                              value: string | Post;
+                          } | null);
+                    url?: string | null;
+                };
+            };
+        };
     };
     layout: (
         | ArchiveBlock
@@ -842,13 +868,17 @@ export interface Schedule {
     scheduleName?: string | null;
     days?:
         | {
-              name: string;
+              name?: string | null;
+              hideDayName?: boolean | null;
               date: string;
+              date_tz: SupportedTimezones;
               sessions?:
                   | {
                         title: string;
                         startTime: string;
+                        startTime_tz: SupportedTimezones;
                         endTime: string;
+                        endTime_tz: SupportedTimezones;
                         subtitle?: string | null;
                         description?: string | null;
                         location?: string | null;
@@ -1161,6 +1191,27 @@ export interface PagesSelect<T extends boolean = true> {
                         id?: T;
                     };
               media?: T;
+              announcementBarSettings?:
+                  | T
+                  | {
+                        toggleAnnouncementBar?: T;
+                        customiseAnnouncementBar?: T;
+                        customisationOptions?:
+                            | T
+                            | {
+                                  announcementText?: T;
+                                  addImage?: T;
+                                  logo?: T;
+                                  link?:
+                                      | T
+                                      | {
+                                            type?: T;
+                                            newTab?: T;
+                                            reference?: T;
+                                            url?: T;
+                                        };
+                              };
+                    };
           };
     layout?:
         | T
@@ -1455,13 +1506,17 @@ export interface ScheduleSelect<T extends boolean = true> {
         | T
         | {
               name?: T;
+              hideDayName?: T;
               date?: T;
+              date_tz?: T;
               sessions?:
                   | T
                   | {
                         title?: T;
                         startTime?: T;
+                        startTime_tz?: T;
                         endTime?: T;
+                        endTime_tz?: T;
                         subtitle?: T;
                         description?: T;
                         location?: T;
@@ -1832,7 +1887,9 @@ export interface Footer {
 export interface Conferencedetail {
     id: string;
     startDate: string;
+    startDate_tz: SupportedTimezones;
     endDate: string;
+    endDate_tz: SupportedTimezones;
     contactDetails?: {
         phone?: {
             generalEnquiries?: string | null;
@@ -1923,7 +1980,9 @@ export interface FooterSelect<T extends boolean = true> {
  */
 export interface ConferencedetailsSelect<T extends boolean = true> {
     startDate?: T;
+    startDate_tz?: T;
     endDate?: T;
+    endDate_tz?: T;
     contactDetails?:
         | T
         | {

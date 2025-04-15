@@ -18,7 +18,7 @@ export async function CollectionBlock(props: CollectionBlockProps & { id?: strin
         blockType,
     } = props;
 
-    const limit = limitFromProps || 100;
+    const limit = limitFromProps || 9000;
     const payload = await getPayload({ config: configPromise });
 
     let items: (Exhibitor | Sponsor)[] = []; // Explicitly typed array

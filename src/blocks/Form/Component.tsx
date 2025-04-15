@@ -11,8 +11,6 @@ import RichText from "@/components/RichText";
 import { Button } from "@/components/ui/button";
 
 import FormEmbed from "./FormEmbed.client";
-// Import the client component
-
 import { fields } from "./fields";
 
 export type FormBlockType = {
@@ -124,8 +122,6 @@ export const FormBlock: React.FC<
         },
         [router, formID, redirect, confirmationType]
     );
-    console.log("formSource:", formSource);
-    console.log("embedCode:", embedCode);
     return (
         <div className="py-20 sm:py-32">
             <div className="container mx-auto grid grid-cols-6 gap-x-16 px-6 lg:grid-cols-12 lg:px-8">
@@ -151,7 +147,6 @@ export const FormBlock: React.FC<
                                     <div className="mb-4 last:mb-0">
                                         {formFromProps.fields &&
                                             formFromProps.fields?.map((field, index) => {
-                                                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                                                 const Field: React.FC<any> =
                                                     fields?.[
                                                         field.blockType as keyof typeof fields
