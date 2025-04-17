@@ -25,14 +25,14 @@ interface HighImpactHeroProps {
                 type?: ("reference" | "custom") | null;
                 newTab?: boolean | null;
                 reference?:
-                | ({
-                    relationTo: "pages";
-                    value: string | Page;
-                } | null)
-                | ({
-                    relationTo: "posts";
-                    value: string | Post;
-                } | null);
+                    | ({
+                          relationTo: "pages";
+                          value: string | Page;
+                      } | null)
+                    | ({
+                          relationTo: "posts";
+                          value: string | Post;
+                      } | null);
                 url?: string | null;
             };
         };
