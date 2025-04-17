@@ -4,6 +4,7 @@ import type { Media as MediaType } from "@/payload-types";
 import { motion, useInView } from "motion/react";
 import React, { useRef, useState } from "react";
 import type { Swiper as SwiperType } from "swiper";
+import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -33,7 +34,6 @@ export const GalleryBlockClient: React.FC<GalleryBlockClientProps> = ({
 }) => {
     const containerRef = useRef(null);
     const isInView = useInView(containerRef, { once: true, amount: 0.5 });
-    const [activeIndex, setActiveIndex] = useState(0);
     const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null);
 
     // Animation variants
@@ -70,15 +70,15 @@ export const GalleryBlockClient: React.FC<GalleryBlockClientProps> = ({
 
     return (
         <div className="py-12 sm:py-20" id={`block-${id}`} ref={containerRef}>
-            <div className="container mx-auto px-6 lg:px-8">
+            <div className="container mx-auto">
                 {galleryTitle && (
                     <motion.div
-                        className="mb-10 flex items-center gap-x-8"
+                        className="mb-10 flex items-center gap-x-8 px-6 lg:px-8"
                         initial={{ opacity: 0, y: -10 }}
                         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -10 }}
                         transition={{ duration: 0.5 }}
                     >
-                        <h2 className="font-display text-center text-2xl font-semibold tracking-wider text-neutral-800 sm:text-left">
+                        <h2 className="text-center text-neutral-800 sm:text-left dark:text-neutral-300">
                             {galleryTitle}
                         </h2>
                         <div className="h-px flex-auto bg-neutral-200"></div>
@@ -90,14 +90,14 @@ export const GalleryBlockClient: React.FC<GalleryBlockClientProps> = ({
                         initial={{ opacity: 0 }}
                         animate={isInView ? { opacity: 1 } : { opacity: 0 }}
                         transition={{ duration: 0.8, delay: 0.2 }}
-                        className="relative"
+                        className="relative grid"
                     >
                         {/* Main gallery Slider */}
                         <Swiper
                             style={
                                 {
-                                    "--swiper-navigation-color": "var(--color-neutral-800)",
-                                    "--swiper-pagination-color": "var(--color-neutral-800)",
+                                    "--swiper-navigation-color": "var(--color-white)",
+                                    "--swiper-pagination-color": "var(--color-white)",
                                 } as React.CSSProperties
                             }
                             modules={[FreeMode, Navigation, Thumbs, Pagination, A11y]}
@@ -108,7 +108,7 @@ export const GalleryBlockClient: React.FC<GalleryBlockClientProps> = ({
                                     thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
                             }}
                             loop={true}
-                            className="gallery-main-swiper mb-3 w-full overflow-visible"
+                            className="gallery-main-swiper"
                             effect="slide"
                         >
                             {images.map((item, index) => (
@@ -116,7 +116,7 @@ export const GalleryBlockClient: React.FC<GalleryBlockClientProps> = ({
                                     <div className="relative">
                                         <Media
                                             resource={item.image}
-                                            imgClassName="rounded-[4rem] object-cover aspect-video"
+                                            imgClassName="rounded-4xl sm:rounded-[4rem] object-cover sm:aspect-video"
                                             priority={index === 0}
                                         />
                                         {item.caption && (
@@ -135,18 +135,23 @@ export const GalleryBlockClient: React.FC<GalleryBlockClientProps> = ({
                         <Swiper
                             onSwiper={setThumbsSwiper}
                             modules={[FreeMode, Navigation, Thumbs]}
-                            slidesPerView={8}
+                            slidesPerView={4}
                             spaceBetween={12}
                             freeMode={true}
                             watchSlidesProgress={true}
                             loop={true}
-                            className="gallery-thumbs-swiper overflow-visible"
+                            breakpoints={{
+                                768: {
+                                    slidesPerView: 8,
+                                },
+                            }}
+                            className="gallery-thumbs-swiper w-full overflow-visible px-12"
                         >
                             {images.map((item, index) => (
                                 <SwiperSlide key={`thumb-${index}`} className="cursor-pointer">
                                     <Media
                                         resource={item.image}
-                                        imgClassName="rounded-xl aspect-4/3 object-cover"
+                                        imgClassName="rounded-sm sm:rounded-xl aspect-4/3 object-cover"
                                     />
                                 </SwiperSlide>
                             ))}

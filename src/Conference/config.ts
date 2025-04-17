@@ -10,6 +10,7 @@ export const ConferenceDetails: GlobalConfig = {
         {
             name: "startDate",
             type: "date",
+            timezone: true,
             label: "Start Date",
             required: true,
             admin: {},
@@ -17,6 +18,7 @@ export const ConferenceDetails: GlobalConfig = {
         {
             name: "endDate",
             type: "date",
+            timezone: true,
             label: "End Date",
             required: true,
             admin: {},

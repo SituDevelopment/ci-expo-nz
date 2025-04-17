@@ -105,7 +105,7 @@ export const CollectionBlockClient: React.FC<CollectionBlockClientProps> = (prop
                             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -10 }}
                             transition={{ duration: 0.5 }}
                         >
-                            <h2 className="font-display text-center text-sm font-semibold tracking-wider text-neutral-800 sm:text-left dark:text-neutral-100">
+                            <h2 className="text-center text-neutral-800 sm:text-left dark:text-neutral-100">
                                 {title}
                             </h2>
                             <div className="h-px flex-auto bg-neutral-200 dark:bg-neutral-700"></div>

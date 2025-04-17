@@ -1,0 +1,19 @@
+.light-logo,
+.dark-logo {
+    height: 6rem;
+    object-fit: contain;
+}
+
+.dark-logo {
+    display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+    .dark-logo {
+        display: block;
+    }
+
+    .light-logo {
+        display: none;
+    }
+}

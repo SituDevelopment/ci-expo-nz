@@ -1,3 +1,4 @@
+import { link } from "@/fields/link";
 import { linkGroup } from "@/fields/linkGroup";
 import type { Field } from "payload";
 
@@ -45,12 +46,13 @@ export const hero: Field = {
             type: "checkbox",
             label: "Hide Conference Information in Header",
             admin: {
-                condition: (_, { type } = {}) => ["highImpact"].includes(type),
+                condition: (_, { type } = {}) => type === "highImpact",
             },
         },
         linkGroup({
             overrides: {
                 maxRows: 2,
+                label: "Button Group",
             },
         }),
         {
@@ -61,6 +63,64 @@ export const hero: Field = {
             },
             relationTo: "media",
             required: true,
+        },
+        {
+            name: "announcementBarSettings",
+            label: "Announcement Bar Settings",
+            type: "group",
+            admin: {
+                condition: (_, { type } = {}) => type === "highImpact",
+                description:
+                    'The "Announcement Bar" is the small text & logo section beneath the Button Group.',
+                hideGutter: true,
+            },
+            fields: [
+                {
+                    name: "toggleAnnouncementBar",
+                    type: "checkbox",
+                    label: "Hide Announcement Bar",
+                },
+                {
+                    name: "customiseAnnouncementBar",
+                    type: "checkbox",
+                    label: "Customise Announcement Bar",
+                    admin: {
+                        condition: (_, { toggleAnnouncementBar } = {}) => !toggleAnnouncementBar,
+                    },
+                },
+                {
+                    name: "customisationOptions",
+                    type: "group",
+                    fields: [
+                        {
+                            name: "announcementText",
+                            type: "text",
+                        },
+                        {
+                            name: "addImage",
+                            type: "checkbox",
+                            label: "Add an image",
+                        },
+                        {
+                            name: "logo",
+                            type: "upload",
+                            relationTo: "media",
+                            admin: {
+                                condition: (_, { addImage } = {}) => addImage,
+                            },
+                        },
+                        link({
+                            appearances: false,
+                            disableLabel: true,
+                        }),
+                    ],
+                    admin: {
+                        condition: (_, { customiseAnnouncementBar, toggleAnnouncementBar }) =>
+                            customiseAnnouncementBar && !toggleAnnouncementBar,
+                        hideGutter: true,
+                    },
+                },
+            ],
         },
     ],
     label: false,

@@ -41,8 +41,6 @@
 ));
 
 @layer base {
-    @import "swiper/css";
-
     html {
         background: var(--color-stone-50);
         color: var(--color-neutral-800);
@@ -114,12 +112,16 @@
         @apply mx-auto;
     }
 
-    .gallery-main-swiper .swiper-slide {
-        @apply opacity-50 transition duration-500;
-    }
+    .gallery-main-swiper {
+        @apply mb-3 w-full overflow-visible rounded-4xl sm:rounded-[4rem];
 
-    .gallery-main-swiper .swiper-slide-active {
-        @apply opacity-100;
+        & .swiper-slide {
+            @apply opacity-50 transition duration-500;
+        }
+
+        & .swiper-slide-active {
+            @apply opacity-100;
+        }
     }
 
     .gallery-thumbs-swiper {
