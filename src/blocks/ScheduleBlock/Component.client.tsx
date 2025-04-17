@@ -127,7 +127,7 @@ export const ScheduleBlockClient: React.FC<ScheduleBlockClientProps> = ({
                     animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
                     transition={{ duration: 0.6, ease: "easeOut" }}
                 >
-                    <h2 className="text-secondary dark:text-secondary-400">
+                    <h2 className="text-primary dark:text-primary-400">
                         {title || scheduleData.scheduleName}
                     </h2>
                     {description && (
@@ -175,7 +175,7 @@ export const ScheduleBlockClient: React.FC<ScheduleBlockClientProps> = ({
                                             }}
                                         >
                                             <div>
-                                                <h3 className="text-secondary-900 dark:text-secondary flex items-center text-2xl font-semibold tracking-tight">
+                                                <h3 className="text-primary-900 dark:text-primary flex items-center text-2xl font-semibold tracking-tight">
                                                     <Tab className="flex items-center focus:outline-none">
                                                         <span className="absolute inset-0" />
                                                         <Calendar className="mr-2 inline-block h-5 w-5" />
@@ -227,9 +227,9 @@ export const ScheduleBlockClient: React.FC<ScheduleBlockClientProps> = ({
                                 custom={dayIndex}
                             >
                                 <div className="flex items-baseline gap-2">
-                                    <Calendar className="text-secondary-500 h-5 w-5" />
+                                    <Calendar className="text-primary-500 h-5 w-5" />
                                     <div>
-                                        <h3 className="text-secondary-900 dark:text-secondary text-2xl font-semibold tracking-tight">
+                                        <h3 className="text-primary-900 dark:text-primary text-2xl font-semibold tracking-tight">
                                             {day.name && <span>{day.name} </span>}{" "}
                                             {formatDate(day.date)}
                                         </h3>
@@ -274,7 +274,7 @@ function SessionsList({ day, formatTime, className, variants }: SessionsListProp
             role="list"
             className={clsx(
                 className,
-                "shadow-secondary-900/5 dark:border-secondary-400/10 dark:shadow-secondary-950/15 space-y-8 rounded-xl border border-neutral-100 bg-white/60 px-10 py-14 text-center shadow-xl backdrop-blur-sm dark:bg-neutral-800/60"
+                "shadow-primary-900/5 dark:border-primary-400/10 dark:shadow-primary-950/15 space-y-8 rounded-xl border border-neutral-100 bg-white/60 px-10 py-14 text-center shadow-xl backdrop-blur-sm dark:bg-neutral-800/60"
             )}
             variants={variants}
         >
@@ -289,18 +289,18 @@ function SessionsList({ day, formatTime, className, variants }: SessionsListProp
                     transition={{ delay: 0.1 * sessionIndex }}
                 >
                     {sessionIndex > 0 && (
-                        <div className="bg-secondary-500/10 dark:bg-secondary-300/20 mx-auto mb-8 h-px w-48" />
+                        <div className="bg-primary-500/10 dark:bg-primary-300/20 mx-auto mb-8 h-px w-48" />
                     )}
-                    <h4 className="text-secondary-900 dark:text-secondary text-lg font-semibold tracking-tight">
+                    <h4 className="text-primary-900 dark:text-primary text-lg font-semibold tracking-tight">
                         {session.title}
                     </h4>
                     {session.subtitle && (
-                        <p className="text-secondary-900 dark:text-secondary mt-1 tracking-tight italic">
+                        <p className="text-primary-900 dark:text-primary mt-1 tracking-tight italic">
                             {session.subtitle}
                         </p>
                     )}
                     {session.description && (
-                        <p className="text-secondary-900 mt-1 tracking-tight">
+                        <p className="text-primary-900 mt-1 tracking-tight">
                             {session.description}
                         </p>
                     )}
@@ -309,7 +309,7 @@ function SessionsList({ day, formatTime, className, variants }: SessionsListProp
                         <time>{formatTime(session.startTime)}</time> -{" "}
                         <time>{formatTime(session.endTime)}</time>
                         {session.location && (
-                            <span className="text-secondary-500 ml-2 flex items-center">
+                            <span className="text-primary-500 ml-2 flex items-center">
                                 <span className="mx-1">•</span>
                                 <MapPin className="mr-1 h-4 w-4" />
                                 {session.location}

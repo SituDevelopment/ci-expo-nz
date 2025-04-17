@@ -88,7 +88,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={transition}
-            className="border-t-secondary relative sticky top-0 z-20 mb-6 border-t-3 px-4 md:px-6 lg:px-8"
+            className="border-t-secondary-500 relative sticky top-0 z-20 mb-6 border-t-3 px-4 md:px-6 lg:px-8"
         >
             <div className="-mx-[4px] flex flex-col rounded-b-4xl border-x border-b border-neutral-200 bg-white dark:border-neutral-700 dark:bg-neutral-900">
                 {/* Main header content */}
