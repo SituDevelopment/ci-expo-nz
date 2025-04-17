@@ -154,13 +154,13 @@ export const HighImpactHero: React.FC<HighImpactHeroProps> = ({
                             className="mt-8 grid gap-x-10 gap-y-6 sm:mt-12 sm:grid-cols-2 sm:gap-x-16 sm:gap-y-10 sm:text-center lg:auto-cols-auto lg:grid-flow-col lg:grid-cols-none lg:justify-center lg:text-center"
                         >
                             <div className="flex items-baseline justify-center gap-3 sm:block">
-                                <dt className="text-secondary-600 text-base">Dates</dt>
+                                <dt className="text-primary-600 text-base">Dates</dt>
                                 <dd className="mt-0.5 text-2xl font-semibold tracking-tight text-white">
                                     {dateDisplay}
                                 </dd>
                             </div>
                             <div className="flex items-baseline justify-center gap-3 sm:block">
-                                <dt className="text-secondary-600 text-base">Location</dt>
+                                <dt className="text-primary-600 text-base">Location</dt>
                                 <dd className="mt-0.5 text-2xl font-semibold tracking-tight text-white">
                                     {venueDisplay}
                                 </dd>
@@ -238,7 +238,7 @@ export const HighImpactHero: React.FC<HighImpactHeroProps> = ({
                                         {customOptions.link && (
                                             <CMSLink
                                                 {...customOptions.link}
-                                                className="text-secondary-500 hover:text-secondary-600 group inline-flex items-start gap-1.5 font-semibold transition"
+                                                className="text-primary-500 hover:text-primary-600 group inline-flex items-start gap-1.5 font-semibold transition"
                                             >
                                                 {hasLogo &&
                                                     typeof customOptions.logo === "object" && (
@@ -265,7 +265,7 @@ export const HighImpactHero: React.FC<HighImpactHeroProps> = ({
                                         <a
                                             target="_blank"
                                             href="https://aacs.org.au"
-                                            className="text-secondary-500 hover:text-secondary-600 group inline-flex items-start gap-1.5 font-semibold transition"
+                                            className="text-primary-500 hover:text-primary-600 group inline-flex items-start gap-1.5 font-semibold transition"
                                         >
                                             <img
                                                 className="pointer-events-none inline-flex w-18 object-contain transition duration-300 group-hover:scale-[1.02]"

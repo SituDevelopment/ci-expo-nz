@@ -101,7 +101,7 @@ export const GridBlockClient: React.FC<GridBlockProps> = (props) => {
                     variants={headerVariants}
                 >
                     {subtitle && (
-                        <h2 className="text-secondary-600 text-base/7 font-semibold">{subtitle}</h2>
+                        <h2 className="text-primary-600 text-base/7 font-semibold">{subtitle}</h2>
                     )}
                     {title && (
                         <p className="mt-2 max-w-lg text-4xl font-semibold tracking-tight text-pretty text-gray-950 sm:text-5xl">

@@ -32,6 +32,7 @@ import { HorizontalRuleFeatureClient as HorizontalRuleFeatureClient_e70f5e05f09f
 import { BlocksFeatureClient as BlocksFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from "@payloadcms/richtext-lexical/client";
 import { RscEntryLexicalCell as RscEntryLexicalCell_44fe37237e0ebf4470c9990d8cb7b07e } from "@payloadcms/richtext-lexical/rsc";
 import { RscEntryLexicalField as RscEntryLexicalField_44fe37237e0ebf4470c9990d8cb7b07e } from "@payloadcms/richtext-lexical/rsc";
+import { LexicalDiffComponent as LexicalDiffComponent_44fe37237e0ebf4470c9990d8cb7b07e } from "@payloadcms/richtext-lexical/rsc";
 import { VercelBlobClientUploadHandler as VercelBlobClientUploadHandler_16c82c5e25f430251a3e3ba57219ff4e } from "@payloadcms/storage-vercel-blob/client";
 
 import { default as default_f96102189b08b24a4261533888a4ca8e } from "../../../components/payload/LoginLogo";
@@ -41,6 +42,8 @@ export const importMap = {
         RscEntryLexicalCell_44fe37237e0ebf4470c9990d8cb7b07e,
     "@payloadcms/richtext-lexical/rsc#RscEntryLexicalField":
         RscEntryLexicalField_44fe37237e0ebf4470c9990d8cb7b07e,
+    "@payloadcms/richtext-lexical/rsc#LexicalDiffComponent":
+        LexicalDiffComponent_44fe37237e0ebf4470c9990d8cb7b07e,
     "@payloadcms/richtext-lexical/client#InlineToolbarFeatureClient":
         InlineToolbarFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
     "@payloadcms/richtext-lexical/client#FixedToolbarFeatureClient":

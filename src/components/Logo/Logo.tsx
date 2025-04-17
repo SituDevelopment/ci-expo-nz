@@ -26,7 +26,7 @@ export const Logo = (props: Props) => {
                 fetchPriority={priority}
                 decoding="async"
                 className={clsx("h-16 w-full max-w-[12rem] dark:hidden", className)}
-                src="/api/media/file/blacklogo-1.png"
+                src="/api/media/file/blacklogo.webp"
             />
             <img
                 alt="Payload Logo"
@@ -36,7 +36,7 @@ export const Logo = (props: Props) => {
                 fetchPriority={priority}
                 decoding="async"
                 className={clsx("hidden h-16 w-full max-w-[12rem] dark:block", className)}
-                src="/api/media/file/whitelogo-1.png"
+                src="/api/media/file/whitelogo.png"
             />
         </>
     );

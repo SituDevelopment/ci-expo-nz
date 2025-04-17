@@ -1906,7 +1906,6 @@ export interface Conferencedetail {
         venueName: string;
         streetAddress: string;
         suburb: string;
-        state: "ACT" | "NSW" | "NT" | "QLD" | "SA" | "TAS" | "VIC" | "WA";
         postcode: string;
     };
     updatedAt?: string | null;
@@ -2007,7 +2006,6 @@ export interface ConferencedetailsSelect<T extends boolean = true> {
               venueName?: T;
               streetAddress?: T;
               suburb?: T;
-              state?: T;
               postcode?: T;
           };
     updatedAt?: T;

@@ -1,29 +1,29 @@
 @import "tailwindcss";
 
 @theme {
-    --color-primary-50: oklch(97.05% 0.0129 17.38);
-    --color-primary-100: oklch(93.59% 0.0309 15.25);
-    --color-primary-200: oklch(88.51% 0.0592 15.75);
-    --color-primary-300: oklch(80.84% 0.1033 17.35);
-    --color-primary-400: oklch(71.18% 0.1634 19.87);
-    --color-primary-500: oklch(60.15% 0.2075 23.19);
-    --color-primary-600: oklch(55.68% 0.2082 25.67);
-    --color-primary-700: oklch(50.48% 0.1883 25.89);
-    --color-primary-800: oklch(44.32% 0.159 24.98);
-    --color-primary-900: oklch(39.57% 0.1305 23.43);
-    --color-primary-950: oklch(25.78% 0.0883 24.42);
+    --color-primary-50: oklch(0.98 0.0142 148.78);
+    --color-primary-100: oklch(0.96 0.0375 148.92);
+    --color-primary-200: oklch(0.91 0.0696 148.1);
+    --color-primary-300: oklch(0.84 0.1223 147.84);
+    --color-primary-400: oklch(0.76 0.1671 146.41);
+    --color-primary-500: oklch(0.67 0.1791 145.45);
+    --color-primary-600: oklch(0.58 0.1591 145.3);
+    --color-primary-700: oklch(0.49 0.1277 145.59);
+    --color-primary-800: oklch(0.42 0.1007 146.34);
+    --color-primary-900: oklch(0.37 0.083 147.07);
+    --color-primary-950: oklch(0.25 0.0587 147.33);
 
-    --color-secondary-50: #ebfeff;
-    --color-secondary-100: #cdfaff;
-    --color-secondary-200: #a1f3ff;
-    --color-secondary-300: #60e8ff;
-    --color-secondary-400: #18d3f8;
-    --color-secondary-500: #00b6de;
-    --color-secondary-600: #009ac7;
-    --color-secondary-700: #087296;
-    --color-secondary-800: #105d7a;
-    --color-secondary-900: #124d67;
-    --color-secondary-950: #053247;
+    --color-secondary-50: oklch(0.97 0.0124 337.52);
+    --color-secondary-100: oklch(0.95 0.0267 337.06);
+    --color-secondary-200: oklch(0.9 0.0576 337.02);
+    --color-secondary-300: oklch(0.83 0.1054 339.45);
+    --color-secondary-400: oklch(0.73 0.1673 342.13);
+    --color-secondary-500: oklch(0.66 0.2031 345.74);
+    --color-secondary-600: oklch(0.58 0.2089 351);
+    --color-secondary-700: oklch(0.52 0.1929 353.73);
+    --color-secondary-800: oklch(0.46 0.1639 354.07);
+    --color-secondary-900: oklch(0.41 0.1378 352.89);
+    --color-secondary-950: oklch(0.28 0.1006 353.97);
 }
 
 @theme inline {

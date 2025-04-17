@@ -16,7 +16,7 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
                         key={i}
                         {...link}
                         appearance="link"
-                        className="hover:text-secondary-500 font-black tracking-widest uppercase hover:no-underline"
+                        className="hover:text-primary-500 font-black tracking-widest uppercase hover:no-underline"
                     />
                 );
             })}

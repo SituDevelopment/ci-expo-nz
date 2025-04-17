@@ -65,7 +65,7 @@ export const ConferenceDetailsBlockClient: React.FC<ConferenceDetailsBlockClient
                 <div className="mx-auto max-w-2xl lg:max-w-none">
                     {title && (
                         <motion.h2
-                            className="text-secondary"
+                            className="text-primary"
                             initial={{ opacity: 0, y: -10 }}
                             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -10 }}
                             transition={{ duration: 0.5 }}

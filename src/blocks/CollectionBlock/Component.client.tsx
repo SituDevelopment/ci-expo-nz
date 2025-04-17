@@ -194,7 +194,7 @@ export const CollectionBlockClient: React.FC<CollectionBlockClientProps> = (prop
                                             <div className="flex items-center justify-between">
                                                 <Dialog.Title
                                                     as="h3"
-                                                    className="text-secondary dark:text-secondary-400"
+                                                    className="text-primary dark:text-primary-400"
                                                 >
                                                     {selectedItem.name}
                                                 </Dialog.Title>
@@ -224,7 +224,7 @@ export const CollectionBlockClient: React.FC<CollectionBlockClientProps> = (prop
                                                     {/* Description */}
                                                     {selectedItem.description && (
                                                         <div className="mb-6">
-                                                            <h4 className="text-secondary-500 dark:text-secondary-400 mb-2">
+                                                            <h4 className="text-primary-500 dark:text-primary-400 mb-2">
                                                                 About
                                                             </h4>
                                                             <p className="text-neutral-700 dark:text-neutral-300">
