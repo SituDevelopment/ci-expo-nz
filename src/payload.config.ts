@@ -30,7 +30,7 @@ export default buildConfig({
             baseDir: path.resolve(dirname),
         },
         timezones: {
-            defaultTimezone: "Australia/Sydney",
+            defaultTimezone: "Pacific/Auckland",
         },
         components: {
             graphics: {
