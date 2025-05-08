@@ -13,7 +13,7 @@ import { FixedToolbarFeature, HeadingFeature, lexicalEditor } from "@payloadcms/
 import { Plugin } from "payload";
 
 const generateTitle: GenerateTitle<Post | Page> = ({ doc }) => {
-    return doc?.title ? `${doc.title} | Payload Website Template` : "Payload Website Template";
+    return doc?.title ? doc.title : "C&I NZ Expo";
 };
 
 const generateURL: GenerateURL<Post | Page> = ({ doc }) => {
