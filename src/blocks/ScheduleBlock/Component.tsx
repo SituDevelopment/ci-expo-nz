@@ -49,6 +49,7 @@ export const ScheduleBlock: React.FC<ScheduleBlockComponentProps> = async ({
                 sessions:
                     day.sessions?.map((session) => ({
                         title: session.title,
+                        timeZone: session.startTime_tz,
                         startTime: session.startTime,
                         endTime: session.endTime,
                         subtitle: session.subtitle || undefined,
