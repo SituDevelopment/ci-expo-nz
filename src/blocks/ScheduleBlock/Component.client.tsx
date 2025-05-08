@@ -14,6 +14,7 @@ interface ScheduleBlockClientProps {
             date: string;
             sessions?: {
                 title: string;
+                timeZone: string;
                 startTime: string;
                 endTime: string;
                 subtitle?: string;
@@ -65,15 +66,15 @@ export const ScheduleBlockClient: React.FC<ScheduleBlockClientProps> = ({
     };
 
     // Format time in a way that's consistent between server and client
-    const formatTime = (timeString: string) => {
+    const formatTime = (timeString: string, timeZone: string) => {
         try {
-            const date = new Date(timeString);
-            // Use explicit time components
-            const hours = date.getHours();
-            const minutes = date.getMinutes().toString().padStart(2, "0");
-            const ampm = hours >= 12 ? "PM" : "AM";
-            const displayHours = hours % 12 || 12; // Convert 0 to 12 for 12 AM
-            return `${displayHours}:${minutes}${ampm}`;
+            const dateLocal = new Date(timeString);
+            const date = dateLocal.toLocaleTimeString("en-US", {
+                timeZone,
+                timeStyle: "short",
+                hour12: true,
+            });
+            return date.replace(" ", "");
         } catch (error) {
             return timeString;
         }
@@ -256,6 +257,7 @@ interface SessionsListProps {
         date: string;
         sessions?: {
             title: string;
+            timeZone: string;
             startTime: string;
             endTime: string;
             subtitle?: string;
@@ -263,7 +265,7 @@ interface SessionsListProps {
             location?: string;
         }[];
     };
-    formatTime: (timeString: string) => string;
+    formatTime: (timeString: string, timeZone: string) => string;
     className?: string;
     variants?: any;
 }
@@ -282,8 +284,9 @@ function SessionsList({ day, formatTime, className, variants }: SessionsListProp
                 <motion.li
                     key={`${session.startTime}-${sessionIndex}`}
                     aria-label={`${session.title} at ${formatTime(
-                        session.startTime
-                    )} - ${formatTime(session.endTime)}`}
+                        session.startTime,
+                        session.timeZone
+                    )} - ${formatTime(session.endTime, session.timeZone)}`}
                     variants={variants}
                     custom={sessionIndex}
                     transition={{ delay: 0.1 * sessionIndex }}
@@ -306,8 +309,8 @@ function SessionsList({ day, formatTime, className, variants }: SessionsListProp
                     )}
                     <p className="mt-1 flex items-center justify-center font-mono text-sm text-neutral-500 dark:text-neutral-300">
                         <Clock className="mr-1 inline-block h-4 w-4" />
-                        <time>{formatTime(session.startTime)}</time> -{" "}
-                        <time>{formatTime(session.endTime)}</time>
+                        <time>{formatTime(session.startTime, session.timeZone)}</time> -{" "}
+                        <time>{formatTime(session.endTime, session.timeZone)}</time>
                         {session.location && (
                             <span className="text-primary-500 ml-2 flex items-center">
                                 <span className="mx-1">•</span>
